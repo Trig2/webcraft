@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Access Forbidden - {{site_name}}</title>
+    {% load static %}
+    {% load tailwind_tags %}
+    {% tailwind_css %}
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'amiko', sans-serif;
+        }
+        
+        .shield-pulse {
+            animation: shield-pulse 2s infinite;
+        }
+        
+        @keyframes shield-pulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+            50% { transform: scale(1.05); box-shadow: 0 0 0 20px rgba(239, 68, 68, 0); }
+        }
+        
+        .error-code {
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .lock-shake {
+            animation: lock-shake 0.5s infinite;
+        }
+        
+        @keyframes lock-shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-2px); }
+            75% { transform: translateX(2px); }
+        }
+        
+        .warning-blink {
+            animation: warning-blink 1s infinite;
+        }
+        
+        @keyframes warning-blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0.3; }
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-gray-900 via-red-900 to-orange-900 relative overflow-hidden">
+    <!-- Security Grid Background -->
+    <div class="absolute inset-0 opacity-10">
+        <div class="grid grid-cols-8 md:grid-cols-16 h-full">
+            <div class="border-r border-white/20"></div>
+            <div class="border-r border-white/20"></div>
+            <div class="border-r border-white/20"></div>
+            <div class="border-r border-white/20"></div>
+            <div class="border-r border-white/20"></div>
+            <div class="border-r border-white/20"></div>
+            <div class="border-r border-white/20"></div>
+            <div class="border-r border-white/20"></div>
+        </div>
+    </div>
+
+    <!-- Warning Signs -->
+    <div class="absolute top-8 left-8 warning-blink">
+        <div class="w-16 h-16 bg-red-500/20 rounded-full flex items-center justify-center border-2 border-red-400">
+            <i class="fas fa-exclamation-triangle text-red-400 text-xl"></i>
+        </div>
+    </div>
+    <div class="absolute top-8 right-8 warning-blink" style="animation-delay: 0.5s;">
+        <div class="w-16 h-16 bg-red-500/20 rounded-full flex items-center justify-center border-2 border-red-400">
+            <i class="fas fa-shield-alt text-red-400 text-xl"></i>
+        </div>
+    </div>
+
+    <div class="relative z-10 min-h-screen flex items-center justify-center px-4">
+        <div class="max-w-4xl mx-auto text-center">
+            <!-- Error Code -->
+            <div class="mb-8" data-aos="zoom-in" data-aos-duration="1000">
+                <h1 class="text-9xl md:text-[12rem] font-bold error-code mb-4">403</h1>
+                <div class="w-32 h-1 bg-gradient-to-r from-red-400 to-orange-400 mx-auto rounded-full"></div>
+            </div>
+
+            <!-- Error Message -->
+            <div class="mb-12" data-aos="fade-up" data-aos-delay="300">
+                <h2 class="text-3xl md:text-5xl font-bold text-white mb-6">Access Forbidden</h2>
+                <p class="text-xl text-red-100 max-w-2xl mx-auto leading-relaxed">
+                    You don't have permission to access this resource. This area is restricted 
+                    and requires proper authorization to proceed.
+                </p>
+            </div>
+
+            <!-- Security Illustration -->
+            <div class="mb-12" data-aos="fade-up" data-aos-delay="500">
+                <div class="relative inline-block">
+                    <!-- Main Shield -->
+                    <div class="w-64 h-64 mx-auto bg-gradient-to-b from-red-600/20 to-red-800/20 backdrop-blur-sm rounded-full flex items-center justify-center border-4 border-red-500/30 shield-pulse">
+                        <div class="relative">
+                            <!-- Lock Icon -->
+                            <div class="w-24 h-24 bg-red-500/30 rounded-full flex items-center justify-center mb-4">
+                                <i class="fas fa-lock text-4xl text-red-300 lock-shake"></i>
+                            </div>
+                            <!-- Shield Icon -->
+                            <div class="absolute -bottom-2 left-1/2 transform -translate-x-1/2">
+                                <i class="fas fa-shield-alt text-5xl text-red-400"></i>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Security Badges -->
+                    <div class="absolute -top-8 -left-8 w-16 h-16 bg-yellow-500/20 rounded-full flex items-center justify-center border border-yellow-400/30">
+                        <i class="fas fa-key text-yellow-300 text-xl"></i>
+                    </div>
+                    <div class="absolute -top-8 -right-8 w-16 h-16 bg-blue-500/20 rounded-full flex items-center justify-center border border-blue-400/30">
+                        <i class="fas fa-user-shield text-blue-300 text-xl"></i>
+                    </div>
+                    <div class="absolute -bottom-8 left-1/2 transform -translate-x-1/2 w-20 h-20 bg-purple-500/20 rounded-full flex items-center justify-center border border-purple-400/30">
+                        <i class="fas fa-ban text-purple-300 text-2xl"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Security Notice -->
+            <div class="mb-12" data-aos="fade-up" data-aos-delay="700">
+                <div class="bg-red-500/10 backdrop-blur-sm rounded-xl p-6 border border-red-400/30 max-w-2xl mx-auto">
+                    <div class="flex items-center justify-center mb-4">
+                        <i class="fas fa-exclamation-triangle text-red-400 text-xl mr-3"></i>
+                        <h3 class="text-lg font-semibold text-white">Security Notice</h3>
+                    </div>
+                    <div class="text-red-100 text-sm space-y-2 text-left">
+                        <p><strong>Reason:</strong> Insufficient permissions</p>
+                        <p><strong>Required:</strong> Administrative access or special authorization</p>
+                        <p><strong>Action:</strong> Contact your administrator if you believe this is an error</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="space-y-4 md:space-y-0 md:space-x-6 md:flex md:justify-center" data-aos="fade-up" data-aos-delay="900">
+                <a href="{% url 'core:home' %}" 
+                   class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-red-600 to-orange-600 text-white font-semibold rounded-full hover:from-orange-600 hover:to-red-600 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
+                    <i class="fas fa-home mr-3"></i>
+                    Back to Home
+                </a>
+                
+                {% if not user.is_authenticated %}
+                <a href="{% url 'core:login' %}" 
+                   class="inline-flex items-center px-8 py-4 bg-white/10 backdrop-blur-sm text-white font-semibold rounded-full hover:bg-white/20 transition-all duration-300 transform hover:scale-105 border border-white/20">
+                    <i class="fas fa-sign-in-alt mr-3"></i>
+                    Login
+                </a>
+                {% else %}
+                <button onclick="history.back()" 
+                        class="inline-flex items-center px-8 py-4 bg-white/10 backdrop-blur-sm text-white font-semibold rounded-full hover:bg-white/20 transition-all duration-300 transform hover:scale-105 border border-white/20">
+                    <i class="fas fa-arrow-left mr-3"></i>
+                    Go Back
+                </button>
+                {% endif %}
+                
+                <a href="{% url 'core:contact' %}" 
+                   class="inline-flex items-center px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
+                    <i class="fas fa-envelope mr-3"></i>
+                    Contact Admin
+                </a>
+            </div>
+
+            <!-- Permission Levels -->
+            <div class="mt-16 pt-8 border-t border-white/20" data-aos="fade-up" data-aos-delay="1100">
+                <h3 class="text-xl font-semibold text-white mb-6">Access Levels</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-3xl mx-auto">
+                    <div class="bg-white/5 backdrop-blur-sm rounded-xl p-4 border border-white/10">
+                        <div class="w-12 h-12 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-3">
+                            <i class="fas fa-user text-green-400"></i>
+                        </div>
+                        <h4 class="text-white font-medium mb-2">Public Access</h4>
+                        <p class="text-gray-300 text-sm">General website content and public pages</p>
+                    </div>
+                    
+                    <div class="bg-white/5 backdrop-blur-sm rounded-xl p-4 border border-yellow-400/30">
+                        <div class="w-12 h-12 bg-yellow-500/20 rounded-full flex items-center justify-center mx-auto mb-3">
+                            <i class="fas fa-user-tie text-yellow-400"></i>
+                        </div>
+                        <h4 class="text-white font-medium mb-2">Member Access</h4>
+                        <p class="text-gray-300 text-sm">Registered user content and features</p>
+                    </div>
+                    
+                    <div class="bg-red-500/10 backdrop-blur-sm rounded-xl p-4 border border-red-400/30">
+                        <div class="w-12 h-12 bg-red-500/20 rounded-full flex items-center justify-center mx-auto mb-3">
+                            <i class="fas fa-user-shield text-red-400"></i>
+                        </div>
+                        <h4 class="text-white font-medium mb-2">Admin Access</h4>
+                        <p class="text-gray-300 text-sm">Administrative and restricted content</p>
+                        <div class="mt-2 text-red-400 text-xs font-medium">RESTRICTED</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <div class="mt-16 text-center" data-aos="fade-up" data-aos-delay="1300">
+                <div class="flex items-center justify-center mb-4">
+                    <div class="flex items-center">
+                        <span class="text-2xl font-bold mr-2 text-red-400">
+                            <i class="fas fa-code"></i>
+                        </span>
+                        <span class="text-xl font-bold text-white">WebBuilder</span>
+                    </div>
+                </div>
+                <p class="text-red-200/80 text-sm">
+                    Professional Web Development • © {% now "Y" %} All rights reserved
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true
+        });
+
+        // Log security event (if analytics is set up)
+        console.warn('403 Forbidden access attempt logged');
+    </script>
+</body>
+</html>

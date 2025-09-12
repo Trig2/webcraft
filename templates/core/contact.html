@@ -1,0 +1,555 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Contact Us - WebBuilder{% endblock %}
+
+{% block content %}
+<!-- Contact Header -->
+<section class="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-gray-900 via-primary-900 to-primary-900">
+    <!-- Animated Background Elements -->
+    <div class="absolute inset-0 overflow-hidden">
+        <!-- Gradient Orbs -->
+        <div class="absolute -top-40 -left-40 w-80 h-80 bg-gradient-to-br from-primary-500/30 to-secondary-500/20 rounded-full mix-blend-multiply animate-float"></div>
+        <div class="absolute -bottom-40 -right-40 w-96 h-96 bg-gradient-to-tl from-secondary-500/30 to-primary-500/20 rounded-full mix-blend-multiply animate-float animation-delay-4000"></div>
+        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-gradient-to-r from-primary-400/20 to-secondary-400/20 rounded-full mix-blend-multiply animate-float animation-delay-8000"></div>
+        
+        <!-- Geometric Patterns -->
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute top-20 left-20 w-16 h-16 border-2 border-white rotate-45 animate-spin-slow"></div>
+            <div class="absolute bottom-32 right-32 w-20 h-20 border border-secondary-300 rounded-full animate-pulse animation-delay-2000"></div>
+            <div class="absolute top-1/3 right-1/4 w-12 h-12 bg-primary-400/30 rounded-lg rotate-12 animate-float animation-delay-6000"></div>
+            <div class="absolute bottom-1/4 left-1/3 w-24 h-24 border border-primary-300 rounded-2xl animate-float animation-delay-10000"></div>
+        </div>
+        
+        <!-- Grid Pattern -->
+        <div class="absolute inset-0 opacity-5">
+            <div class="w-full h-full" style="background-image: url('data:image/svg+xml,<svg width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><g fill="white" fill-opacity="0.3"><circle cx="20" cy="20" r="1"/></g></svg>'); background-size: 40px 40px;"></div>
+        </div>
+    </div>
+
+    <div class="container mx-auto px-4 text-center relative z-20">
+        <div class="max-w-5xl mx-auto reveal">
+            <!-- Premium Badge -->
+            <div class="inline-flex items-center px-8 py-4 bg-white/10 backdrop-blur-lg rounded-full text-sm font-bold text-white mb-8 shadow-2xl border border-white/20 hover:bg-white/15 transition-all duration-300">
+                <i class="fas fa-headset mr-3 text-secondary-400"></i>
+                <span class="bg-gradient-to-r from-primary-300 to-secondary-300 bg-clip-text text-transparent">We're Here to Help</span>
+            </div>
+
+            <!-- Main Heading -->
+            <h1 class="text-4xl md:text-5xl lg:text-7xl font-black mb-8 leading-none">
+                <span class=" bg-gradient-to-r from-white via-primary-200 to-secondary-200 bg-clip-text text-transparent mb-4">
+                    Get In
+                </span>
+                <span class=" bg-gradient-to-r from-secondary-400 via-primary-400 to-white bg-clip-text text-transparent">
+                    Touch
+                </span>
+            </h1>
+
+            <!-- Subtitle -->
+            <p class="text-md md:text-xl text-gray-300 mb-12 max-w-4xl mx-auto leading-relaxed font-medium">
+                Ready to transform your digital presence? Let's discuss your project and bring your vision to life with our expert team.
+            </p>
+
+            <!-- Quick Stats -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16 max-w-4xl mx-auto">
+                <div class="text-center group">
+                    <div class="text-4xl md:text-5xl font-black text-white mb-2 group-hover:scale-110 transition-transform duration-300">24h</div>
+                    <div class="text-gray-400 font-medium">Response Time</div>
+                </div>
+                <div class="text-center group">
+                    <div class="text-4xl md:text-5xl font-black text-white mb-2 group-hover:scale-110 transition-transform duration-300">100%</div>
+                    <div class="text-gray-400 font-medium">Satisfaction Rate</div>
+                </div>
+                <div class="text-center group">
+                    <div class="text-4xl md:text-5xl font-black text-white mb-2 group-hover:scale-110 transition-transform duration-300">50+</div>
+                    <div class="text-gray-400 font-medium">Happy Clients</div>
+                </div>
+                <div class="text-center group">
+                    <div class="text-4xl md:text-5xl font-black text-white mb-2 group-hover:scale-110 transition-transform duration-300">24/7</div>
+                    <div class="text-gray-400 font-medium">Support</div>
+                </div>
+            </div>
+
+            <!-- CTA Buttons -->
+            <div class="flex flex-col sm:flex-row gap-6 justify-center items-center mb-12">
+                <a href="#contact-form" class="group bg-primary-600 hover:from-primary-700 hover:via-primary-600 hover:to-secondary-600 text-white font-bold px-6 py-3 rounded-2xl transition-all duration-500 transform hover:scale-105 shadow-2xl hover:shadow-primary-500/25 backdrop-blur-sm relative overflow-hidden">
+                    <!-- Button Background Effect -->
+                    <div class="absolute inset-0 bg-gradient-to-r from-white/0 via-white/10 to-white/0 -skew-x-12 transform -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+                    
+                    <span class="relative flex items-center justify-center text-lg font-black">
+                        <i class="fas fa-paper-plane mr-3 group-hover:rotate-12 transition-transform duration-300"></i>
+                        Send Message
+                    </span>
+                </a>
+
+                <a href="tel:+1234567890" class="group bg-white/10 backdrop-blur-lg hover:bg-white/20 text-white font-bold px-6 py-3 rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-2xl border border-white/20 hover:border-white/40">
+                    <span class="flex items-center justify-center text-lg font-black">
+                        <i class="fas fa-phone mr-3 group-hover:animate-bounce text-secondary-400"></i>
+                        Call Now
+                    </span>
+                </a>
+            </div>
+
+            <!-- Trust Indicators -->
+            <div class="flex flex-wrap justify-center items-center gap-8 opacity-60">
+                <div class="flex items-center text-gray-400">
+                    <i class="fas fa-shield-alt text-secondary-400 mr-2"></i>
+                    <span class="text-sm font-medium">Secure & Confidential</span>
+                </div>
+                <div class="flex items-center text-gray-400">
+                    <i class="fas fa-clock text-primary-400 mr-2"></i>
+                    <span class="text-sm font-medium">Quick Response</span>
+                </div>
+                <div class="flex items-center text-gray-400">
+                    <i class="fas fa-handshake text-secondary-400 mr-2"></i>
+                    <span class="text-sm font-medium">Professional Service</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+  
+</section>
+
+<style>
+  .shadow-text {
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  }
+</style>
+
+<!-- Success/Error Alerts -->
+{% if messages %}
+<div class="container mx-auto px-4 mt-8">
+    {% for message in messages %}
+    <div class="mb-4 p-4 rounded-lg text-white font-semibold {{ message.tags }}"
+         style="background: linear-gradient(90deg, #2563eb 0%, #1e40af 100%);">
+        {{ message }}
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+<!-- Contact Form and Info -->
+<section class="py-32 bg-gradient-to-br from-gray-50 via-white to-primary-50 relative overflow-hidden" id="contact-form">
+    <!-- Background Pattern -->
+    <div class="absolute inset-0 opacity-5">
+        <div class="absolute inset-0" style="background-image: url('data:image/svg+xml,<svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><g fill="%23154D71" fill-opacity="0.1"><circle cx="7" cy="7" r="3"/><circle cx="53" cy="53" r="3"/><circle cx="7" cy="53" r="3"/><circle cx="53" cy="7" r="3"/></g></g></svg>'); background-size: 60px 60px;"></div>
+    </div>
+    
+    <!-- Floating Elements -->
+    <div class="absolute inset-0 overflow-hidden pointer-events-none">
+        <div class="absolute top-32 left-20 w-20 h-20 border border-primary-200/30 rounded-2xl rotate-12 animate-float"></div>
+        <div class="absolute bottom-40 right-32 w-16 h-16 bg-secondary-200/20 rounded-full animate-float animation-delay-4000"></div>
+        <div class="absolute top-1/2 right-20 w-12 h-12 bg-primary-300/20 rounded-lg rotate-45 animate-float animation-delay-8000"></div>
+        <div class="absolute bottom-20 left-1/4 w-24 h-24 border border-secondary-300/20 rounded-3xl animate-float animation-delay-12000"></div>
+    </div>
+
+    <div class="container mx-auto px-4 relative z-10">
+        <!-- Enhanced Header -->
+        <div class="text-center mb-20 reveal">
+            <div class="inline-flex items-center px-6 py-3 bg-white/80 backdrop-blur-sm rounded-full text-sm font-semibold text-primary-700 mb-6 shadow-lg border border-primary-100">
+                <i class="fas fa-comments mr-3 text-secondary-500"></i>
+                Let's Start the Conversation
+            </div>
+            <h2 class="text-5xl md:text-6xl font-extrabold mb-8 bg-gradient-to-r from-primary-700 via-primary-500 to-secondary-500 bg-clip-text text-transparent">
+                Send Us a Message
+            </h2>
+            <div class="w-32 h-1 bg-gradient-to-r from-primary-500 to-secondary-500 mx-auto mb-8 rounded-full shadow-lg"></div>
+            <p class="text-xl text-gray-700 max-w-4xl mx-auto leading-relaxed font-medium">
+                Ready to bring your vision to life? Fill out the form below and our team will get back to you within 24 hours with a personalized response.
+            </p>
+        </div>
+
+        <div class="flex flex-col lg:flex-row gap-12 max-w-7xl mx-auto">
+            <!-- Contact Form -->
+            <div class="lg:w-2/3 reveal" data-aos="fade-right" data-aos-delay="100">
+                <div class="p-8 lg:p-12 relative overflow-hidden">
+                    <!-- Background Glow -->
+                    {% comment %} <div class="absolute inset-0 bg-gradient-to-br from-primary-50/50 to-secondary-50/30"></div> {% endcomment %}
+                    
+                    <!-- Decorative Corner -->
+                    {% comment %} <div class="absolute top-0 right-0 w-40 h-40 bg-gradient-to-bl from-primary-500/10 to-secondary-500/5 rounded-bl-3xl -mt-8 -mr-8"></div> {% endcomment %}
+
+                    <div class="relative z-10">
+                        <form method="post" action="{% url 'core:contact' %}" class="space-y-8" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            
+                            <!-- Name and Email Row -->
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                <div class="group">
+                                    <label for="name" class="block text-sm font-bold text-gray-700 mb-3 group-focus-within:text-primary-600 transition-colors duration-300">
+                                        <i class="fas fa-user mr-2 text-primary-500"></i>
+                                        Your Name *
+                                    </label>
+                                    <input type="text" id="name" name="name" required 
+                                           class="w-full px-6 py-4 bg-white/80 border border-gray-200 rounded-2xl focus:outline-none focus:ring-4 focus:ring-primary-500/20 focus:border-primary-500 transition-all duration-300 text-gray-800 font-medium placeholder-gray-400 hover:shadow-xl"
+                                           placeholder="Enter your full name">
+                                </div>
+                                <div class="group">
+                                    <label for="email" class="block text-sm font-bold text-gray-700 mb-3 group-focus-within:text-primary-600 transition-colors duration-300">
+                                        <i class="fas fa-envelope mr-2 text-secondary-500"></i>
+                                        Your Email *
+                                    </label>
+                                    <input type="email" id="email" name="email" required 
+                                           class="w-full px-6 py-4 bg-white/80 border border-gray-200 rounded-2xl focus:outline-none focus:ring-4 focus:ring-primary-500/20 focus:border-primary-500 transition-all duration-300 text-gray-800 font-medium placeholder-gray-400  hover:shadow-xl"
+                                           placeholder="Enter your email address">
+                                </div>
+                            </div>
+                            
+                            <!-- Phone -->
+                            <div class="group">
+                                <label for="phone" class="block text-sm font-bold text-gray-700 mb-3 group-focus-within:text-primary-600 transition-colors duration-300">
+                                    <i class="fas fa-phone mr-2 text-primary-500"></i>
+                                    Phone Number
+                                </label>
+                                <input type="tel" id="phone" name="phone" 
+                                       class="w-full px-6 py-4 bg-white/80 border border-gray-200 rounded-2xl focus:outline-none focus:ring-4 focus:ring-primary-500/20 focus:border-primary-500 transition-all duration-300 text-gray-800 font-medium placeholder-gray-400 hover:shadow-xl"
+                                       placeholder="Enter your phone number">
+                            </div>
+                            
+                            <!-- Subject -->
+                            <div class="group">
+                                <label for="subject" class="block text-sm font-bold text-gray-700 mb-3 group-focus-within:text-primary-600 transition-colors duration-300">
+                                    <i class="fas fa-tag mr-2 text-secondary-500"></i>
+                                    Subject *
+                                </label>
+                                <input type="text" id="subject" name="subject" required 
+                                       class="w-full px-6 py-4 bg-white/80 border border-gray-200 rounded-2xl focus:outline-none focus:ring-4 focus:ring-primary-500/20 focus:border-primary-500 transition-all duration-300 text-gray-800 font-medium placeholder-gray-400 hover:shadow-xl"
+                                       placeholder="What's this about?">
+                            </div>
+                            
+                            <!-- Message -->
+                            <div class="group">
+                                <label for="message" class="block text-sm font-bold text-gray-700 mb-3 group-focus-within:text-primary-600 transition-colors duration-300">
+                                    <i class="fas fa-comment-alt mr-2 text-primary-500"></i>
+                                    Message *
+                                </label>
+                                <textarea id="message" name="message" rows="6" required 
+                                          class="w-full px-6 py-4 bg-white/80 border border-gray-200 rounded-2xl focus:outline-none focus:ring-4 focus:ring-primary-500/20 focus:border-primary-500 transition-all duration-300 text-gray-800 font-medium placeholder-gray-400 hover:shadow-xl resize-none"
+                                          placeholder="Tell us about your project and requirements..."></textarea>
+                            </div>
+                            
+                            <!-- File Upload -->
+                            <div class="group">
+                                <label for="attachment" class="block text-sm font-bold text-gray-700 mb-3">
+                                    <i class="fas fa-paperclip mr-2 text-secondary-500"></i>
+                                    Attachment (optional)
+                                </label>
+                                <div class="relative">
+                                    <div class="border-2 border-dashed border-gray-300 rounded-2xl p-8 bg-white/40 backdrop-blur-sm hover:bg-white/60 hover:border-primary-400 transition-all duration-300 text-center group-hover:shadow-lg">
+                                        <div class="flex flex-col items-center">
+                                            <div class="w-16 h-16 bg-secondary-900 rounded-2xl flex items-center justify-center mb-4 shadow-lg">
+                                                <i class="fas fa-cloud-upload-alt text-white text-2xl"></i>
+                                            </div>
+                                            <p class="text-gray-600 font-medium mb-2">Drag & drop files here</p>
+                                            <p class="text-gray-500 text-sm">or click to browse</p>
+                                            <input type="file" id="attachment" name="attachment" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Submit Button -->
+                            <div class="text-center pt-4">
+                                <button type="submit" class="group bg-primary-600 text-white font-bold px-6 py-3 rounded-2xl transition-all duration-500 transform hover:scale-105 shadow-2xl hover:shadow-primary-500/25 relative overflow-hidden">
+                                    <!-- Button Background Effect -->
+                                    {% comment %} <div class="absolute inset-0 bg-gradient-to-r from-white/0 via-white/10 to-white/0 -skew-x-12 transform -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div> {% endcomment %}
+                                    
+                                    <span class="relative flex items-center justify-center text-lg font-black">
+                                        <i class="fas fa-paper-plane mr-3 group-hover:rotate-12 transition-transform duration-300"></i>
+                                        Send Message
+                                    </span>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Information -->
+            <div class="lg:w-1/3 reveal" data-aos="fade-left" data-aos-delay="200">
+                <div class="bg-gradient-to-br from-gray-900 via-primary-900 to-secondary-900 rounded-3xl p-4 lg:p-8 text-white sticky top-8 overflow-hidden ">
+                    <!-- Background Pattern -->
+                   
+
+                    <!-- Floating Elements -->
+                    <div class="absolute top-8 right-8 w-20 h-20 border border-white/10 rounded-2xl rotate-12 animate-float"></div>
+                    <div class="absolute bottom-8 left-8 w-16 h-16 bg-primary-500/20 rounded-full animate-float animation-delay-4000"></div>
+
+                    <div class="relative z-10">
+                        <div class="text-center mb-12">
+                            <h3 class="text-3xl font-black mb-4 bg-gradient-to-r from-white to-primary-200 bg-clip-text text-transparent">
+                                Contact Information
+                            </h3>
+                            <div class="w-16 h-1 bg-gradient-to-r from-primary-400 to-secondary-400 mx-auto rounded-full"></div>
+                        </div>
+                        
+                        <div class="space-y-8">
+                            <!-- Address -->
+                            <div class="group">
+                                <div class="flex items-start">
+                                    <div class="flex-shrink-0 w-[50px] h-[50px] bg-gradient-to-br from-primary-500/20 to-secondary-500/20 rounded-2xl flex items-center justify-center border border-white/10 group-hover:scale-110 transition-transform duration-300">
+                                        <i class="fas fa-map-marker-alt text-2xl text-primary-300"></i>
+                                    </div>
+                                    <div class="ml-6">
+                                        <h4 class="text-xl font-bold mb-2 text-white">Address</h4>
+                                        <p class="text-gray-300 leading-relaxed">{{address}}</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Email -->
+                            <div class="group">
+                                <div class="flex items-start">
+                                    <div class="flex-shrink-0 w-[50px] h-[50px] bg-gradient-to-br from-secondary-500/20 to-primary-500/20 rounded-2xl flex items-center justify-center border border-white/10 group-hover:scale-110 transition-transform duration-300">
+                                        <i class="fas fa-envelope text-2xl text-secondary-300"></i>
+                                    </div>
+                                    <div class="ml-6">
+                                        <h4 class="text-xl font-bold mb-2 text-white">Email</h4>
+                                        <p class="text-gray-300">{{mail}}</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Phone -->
+                            <div class="group">
+                                <div class="flex items-start">
+                                    <div class="flex-shrink-0 w-[50px] h-[50px] bg-gradient-to-br from-primary-500/20 to-secondary-500/20 rounded-2xl flex items-center justify-center border border-white/10 group-hover:scale-110 transition-transform duration-300">
+                                        <i class="fas fa-phone text-2xl text-primary-300"></i>
+                                    </div>
+                                    <div class="ml-6">
+                                        <h4 class="text-xl font-bold mb-2 text-white">Phone</h4>
+                                        <p class="text-gray-300">{{tel}}</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Business Hours -->
+                            <div class="group">
+                                <div class="flex items-start">
+                                    <div class="flex-shrink-0 w-[50px] h-[50px] bg-gradient-to-br from-secondary-500/20 to-primary-500/20 rounded-2xl flex items-center justify-center border border-white/10 group-hover:scale-110 transition-transform duration-300">
+                                        <i class="fas fa-clock text-2xl text-secondary-300"></i>
+                                    </div>
+                                    <div class="ml-6">
+                                        <h4 class="text-xl font-bold mb-2 text-white">Business Hours</h4>
+                                        <p class="text-gray-300 text-sm leading-relaxed">
+                                            Monday - Friday: 9:00 AM - 5:00 PM<br>
+                                            Saturday - Sunday: Closed
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Social Media -->
+                        <div class="mt-12 pt-8 border-t border-white/10">
+                            <h4 class="text-xl font-bold mb-6 text-center text-white">Connect With Us</h4>
+                            <div class="flex justify-center space-x-4">
+                                <a href="{{facebook}}" class="group w-[50px] h-[50px] bg-white/10 backdrop-blur-sm hover:bg-gradient-to-br hover:from-blue-600 hover:to-blue-700 rounded-2xl flex items-center justify-center transition-all duration-300 hover:scale-110 shadow-lg hover:shadow-xl border border-white/10 hover:border-blue-400">
+                                    <i class="fab fa-facebook-f text-xl text-white group-hover:text-white"></i>
+                                </a>
+                                <a href="{{twitter}}" class="group w-[50px] h-[50px] bg-white/10 backdrop-blur-sm hover:bg-gradient-to-br hover:from-sky-500 hover:to-sky-600 rounded-2xl flex items-center justify-center transition-all duration-300 hover:scale-110 shadow-lg hover:shadow-xl border border-white/10 hover:border-sky-400">
+                                    <i class="fab fa-twitter text-xl text-white group-hover:text-white"></i>
+                                </a>
+                                <a href="{{instagram}}" class="group w-[50px] h-[50px] bg-white/10 backdrop-blur-sm hover:bg-gradient-to-br hover:from-pink-500 hover:to-purple-600 rounded-2xl flex items-center justify-center transition-all duration-300 hover:scale-110 shadow-lg hover:shadow-xl border border-white/10 hover:border-pink-400">
+                                    <i class="fab fa-instagram text-xl text-white group-hover:text-white"></i>
+                                </a>
+                                <a href="{{linkedin}}" class="group w-[50px] h-[50px] bg-white/10 backdrop-blur-sm hover:bg-gradient-to-br hover:from-blue-700 hover:to-blue-800 rounded-2xl flex items-center justify-center transition-all duration-300 hover:scale-110 shadow-lg hover:shadow-xl border border-white/10 hover:border-blue-400">
+                                    <i class="fab fa-linkedin-in text-xl text-white group-hover:text-white"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Response Time Badge -->
+                        <div class="mt-8 bg-white/5 backdrop-blur-lg rounded-2xl p-6 border border-white/10 text-center">
+                            <div class="flex items-center justify-center mb-3">
+                                <i class="fas fa-lightning-bolt text-2xl text-secondary-400 mr-3"></i>
+                                <span class="text-xl font-bold text-white">Quick Response</span>
+                            </div>
+                            <p class="text-gray-300 text-sm">We typically respond within 24 hours</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Map Section -->
+<section class="py-20 bg-gradient-to-b from-white to-blue-50 relative overflow-hidden">
+    <!-- Decorative Elements -->
+    <div class="absolute top-0 left-0 w-full h-20 bg-gradient-to-b from-gray-50 to-transparent"></div>
+    <div class="absolute bottom-0 right-0 w-64 h-64 bg-blue-100 rounded-full opacity-20 -mr-32 -mb-32"></div>
+
+    <div class="container mx-auto px-4 relative z-10">
+        <div class="text-center mb-12" data-aos="fade-up">
+            <span class="text-blue-600 font-semibold uppercase tracking-wider mb-2 block">Our Location</span>
+            <h2 class="text-4xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600">Find Us</h2>
+            <div class="w-24 h-1 bg-gradient-to-r from-blue-400 to-indigo-500 mx-auto mb-6 rounded-full"></div>
+            <p class="text-gray-600 max-w-2xl mx-auto">Visit our office or use the map below to get directions to our location.</p>
+        </div>
+
+        <!-- Google Map Embed -->
+        <div class="relative" data-aos="zoom-in" data-aos-delay="100">
+            <!-- Map Frame -->
+            <div class="absolute inset-0 bg-gradient-to-br from-blue-600 to-indigo-600 rounded-2xl transform rotate-1 scale-105 shadow-xl -z-10"></div>
+
+            <div class="w-full h-96 rounded-xl overflow-hidden shadow-lg border-8 border-white">
+                <iframe
+                    src="https://www.google.com/maps?q=123+Web+Street,+Digital+Accra,+12345&output=embed"
+                    width="100%" height="100%" style="border:0; min-height:24rem;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+
+            <!-- Stats Card -->
+            <div class="absolute -bottom-6 -left-6 bg-white rounded-lg shadow-lg p-4 flex items-center gap-3 border border-gray-100 max-sm:hidden">
+                <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-blue-600">
+                    <i class="fas fa-map-marker-alt text-xl"></i>
+                </div>
+                <div>
+                    <div class="text-2xl font-bold text-gray-800">{{address}}</div>
+                    <div class="text-sm text-gray-600">Digital City, 12345</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ CTA -->
+<section class="relative py-32 bg-gradient-to-br from-gray-900 via-primary-900 to-secondary-900 overflow-hidden">
+    <!-- Animated Background Elements -->
+    <div class="absolute inset-0 overflow-hidden">
+        <!-- Gradient Orbs -->
+        <div class="absolute -top-40 -left-40 w-80 h-80 bg-gradient-to-br from-primary-500/30 to-secondary-500/20 rounded-full mix-blend-multiply animate-float"></div>
+        <div class="absolute -bottom-40 -right-40 w-96 h-96 bg-gradient-to-tl from-secondary-500/30 to-primary-500/20 rounded-full mix-blend-multiply animate-float animation-delay-4000"></div>
+        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-gradient-to-r from-primary-400/20 to-secondary-400/20 rounded-full mix-blend-multiply animate-float animation-delay-8000"></div>
+        
+        <!-- Geometric Patterns -->
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute top-20 left-20 w-16 h-16 border-2 border-white rotate-45 animate-spin-slow"></div>
+            <div class="absolute bottom-32 right-32 w-20 h-20 border border-secondary-300 rounded-full animate-pulse animation-delay-2000"></div>
+            <div class="absolute top-1/3 right-1/4 w-12 h-12 bg-primary-400/30 rounded-lg rotate-12 animate-float animation-delay-6000"></div>
+            <div class="absolute bottom-1/4 left-1/3 w-24 h-24 border border-primary-300 rounded-2xl animate-float animation-delay-10000"></div>
+        </div>
+        
+        <!-- Grid Pattern -->
+        <div class="absolute inset-0 opacity-5">
+            <div class="w-full h-full" style="background-image: url('data:image/svg+xml,<svg width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><g fill="white" fill-opacity="0.3"><circle cx="20" cy="20" r="1"/></g></svg>'); background-size: 40px 40px;"></div>
+        </div>
+    </div>
+
+    <div class="container mx-auto px-4 text-center relative z-10">
+        <div class="max-w-5xl mx-auto reveal">
+            <!-- Premium Badge -->
+            <div class="inline-flex items-center px-8 py-4 bg-white/10 backdrop-blur-lg rounded-full text-sm font-bold text-white mb-8 shadow-2xl border border-white/20 hover:bg-white/15 transition-all duration-300">
+                <i class="fas fa-question-circle mr-3 text-secondary-400"></i>
+                <span class="bg-gradient-to-r from-primary-300 to-secondary-300 bg-clip-text text-transparent">Need Quick Answers?</span>
+            </div>
+
+            <!-- Main Heading -->
+            <h2 class="text-5xl md:text-7xl lg:text-8xl font-black mb-8 leading-none">
+                <span class="block bg-gradient-to-r from-white via-primary-200 to-secondary-200 bg-clip-text text-transparent mb-4">
+                    Still Have
+                </span>
+                <span class="block bg-gradient-to-r from-secondary-400 via-primary-400 to-white bg-clip-text text-transparent">
+                    Questions?
+                </span>
+            </h2>
+
+            <!-- Subtitle -->
+            <p class="text-xl md:text-2xl text-gray-300 mb-12 max-w-4xl mx-auto leading-relaxed font-medium">
+                Check out our comprehensive FAQ section for quick answers to common questions, or learn more about our team and services.
+            </p>
+
+            <!-- Quick Info Stats -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16 max-w-4xl mx-auto">
+                <div class="text-center group">
+                    <div class="w-20 h-20 bg-gradient-to-br from-primary-500/20 to-secondary-500/20 rounded-2xl flex items-center justify-center mx-auto mb-4 border border-white/10 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-lightning-bolt text-3xl text-primary-300"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-2">Quick Answers</h3>
+                    <p class="text-gray-400">Instant solutions to common questions</p>
+                </div>
+                <div class="text-center group">
+                    <div class="w-20 h-20 bg-gradient-to-br from-secondary-500/20 to-primary-500/20 rounded-2xl flex items-center justify-center mx-auto mb-4 border border-white/10 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-book-open text-3xl text-secondary-300"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-2">Detailed Guides</h3>
+                    <p class="text-gray-400">Comprehensive information about our process</p>
+                </div>
+                <div class="text-center group">
+                    <div class="w-20 h-20 bg-gradient-to-br from-primary-500/20 to-secondary-500/20 rounded-2xl flex items-center justify-center mx-auto mb-4 border border-white/10 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-users text-3xl text-primary-300"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-2">Expert Team</h3>
+                    <p class="text-gray-400">Meet the professionals behind our work</p>
+                </div>
+            </div>
+
+            <!-- CTA Buttons -->
+            <div class="flex flex-col sm:flex-row gap-6 justify-center items-center mb-12">
+                <a href="{% url 'core:faq' %}" class="group bg-gradient-to-r from-primary-600 via-primary-500 to-secondary-500 hover:from-primary-700 hover:via-primary-600 hover:to-secondary-600 text-white font-bold px-12 py-6 rounded-2xl transition-all duration-500 transform hover:scale-105 shadow-2xl hover:shadow-primary-500/25 border border-primary-400/50 backdrop-blur-sm relative overflow-hidden">
+                    <!-- Button Background Effect -->
+                    <div class="absolute inset-0 bg-gradient-to-r from-white/0 via-white/10 to-white/0 -skew-x-12 transform -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+                    
+                    <span class="relative flex items-center justify-center text-lg font-black">
+                        <i class="fas fa-question-circle mr-3 group-hover:rotate-12 transition-transform duration-300"></i>
+                        View FAQ
+                    </span>
+                </a>
+
+                <a href="{% url 'core:about' %}" class="group bg-white/10 backdrop-blur-lg hover:bg-white/20 text-white font-bold px-12 py-6 rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-2xl border border-white/20 hover:border-white/40">
+                    <span class="flex items-center justify-center text-lg font-black">
+                        <i class="fas fa-info-circle mr-3 group-hover:animate-bounce text-secondary-400"></i>
+                        About Us
+                    </span>
+                </a>
+            </div>
+
+            <!-- Help Center Features -->
+            <div class="bg-white/5 backdrop-blur-lg rounded-3xl border border-white/10 p-8 max-w-4xl mx-auto shadow-2xl">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="text-center">
+                        <div class="flex items-center justify-center mb-3">
+                            <i class="fas fa-clock text-2xl text-primary-300 mr-3"></i>
+                            <span class="text-xl font-bold text-white">24/7 Support</span>
+                        </div>
+                        <p class="text-gray-400 text-sm">Round-the-clock assistance available</p>
+                    </div>
+                    
+                    <div class="text-center">
+                        <div class="flex items-center justify-center mb-3">
+                            <i class="fas fa-search text-2xl text-secondary-300 mr-3"></i>
+                            <span class="text-xl font-bold text-white">Searchable FAQ</span>
+                        </div>
+                        <p class="text-gray-400 text-sm">Find answers quickly with search</p>
+                    </div>
+                    
+                    <div class="text-center">
+                        <div class="flex items-center justify-center mb-3">
+                            <i class="fas fa-heart text-2xl text-primary-300 mr-3"></i>
+                            <span class="text-xl font-bold text-white">Client Focused</span>
+                        </div>
+                        <p class="text-gray-400 text-sm">Solutions tailored to your needs</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Trust Indicators -->
+            <div class="mt-16 flex flex-wrap justify-center items-center gap-8 opacity-60">
+                <div class="flex items-center text-gray-400">
+                    <i class="fas fa-shield-alt text-secondary-400 mr-2"></i>
+                    <span class="text-sm font-medium">Trusted by 50+ Clients</span>
+                </div>
+                <div class="flex items-center text-gray-400">
+                    <i class="fas fa-award text-primary-400 mr-2"></i>
+                    <span class="text-sm font-medium">Industry Experts</span>
+                </div>
+                <div class="flex items-center text-gray-400">
+                    <i class="fas fa-handshake text-secondary-400 mr-2"></i>
+                    <span class="text-sm font-medium">Personalized Service</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

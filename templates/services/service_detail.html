@@ -1,0 +1,525 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ service.name }} - {{site_name}} Services{% endblock %}
+{% block meta_description %}{{ service.short_description }}{% endblock %}
+
+{% block content %}
+<!-- Premium Service Header -->
+<section class="relative min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 flex items-center justify-center overflow-hidden">
+    <!-- Animated Background Effects -->
+    <div class="absolute inset-0 overflow-hidden">
+        <!-- Animated Mesh Background -->
+        <div class="absolute top-0 left-0 w-full h-full opacity-20">
+            <div class="mesh-gradient animate-pulse"></div>
+        </div>
+        
+        <!-- Floating Elements -->
+        <div class="absolute top-20 right-20 w-96 h-96 bg-gradient-to-br from-primary-500/30 to-secondary-500/30 rounded-full blur-3xl animate-float animation-delay-4000"></div>
+        <div class="absolute bottom-20 left-20 w-80 h-80 bg-gradient-to-tl from-secondary-500/20 to-primary-500/20 rounded-full blur-3xl animate-float animation-delay-8000"></div>
+        
+        <!-- Geometric Shapes -->
+        <div class="absolute top-1/3 left-1/4 w-24 h-24 border-2 border-primary-400/40 rounded-3xl rotate-45 animate-spin-slow"></div>
+        <div class="absolute bottom-1/3 right-1/4 w-20 h-20 bg-secondary-400/30 rounded-2xl animate-float animation-delay-6000"></div>
+        <div class="absolute top-2/3 right-1/3 w-32 h-2 bg-gradient-to-r from-primary-400/50 to-secondary-400/50 rounded-full animate-float animation-delay-10000"></div>
+    </div>
+
+    <div class="container mx-auto px-4 relative z-10">
+        <div class="flex flex-col lg:flex-row items-center gap-16">
+            <!-- Service Content -->
+            <div class="lg:w-2/3 text-center lg:text-left reveal">
+                <!-- Service Badge -->
+                <div class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-primary-500/20 to-secondary-500/20 backdrop-blur-lg border border-primary-400/30 rounded-full text-sm font-bold text-primary-300 mb-8">
+                    <i class="fas fa-tag mr-2"></i>
+                    {{ service.get_category_display }}
+                </div>
+
+                <!-- Service Title -->
+                <h1 class="text-5xl md:text-7xl font-black text-white mb-8 leading-tight">
+                    <span class="bg-gradient-to-r from-primary-400 to-secondary-400 bg-clip-text text-transparent">
+                        {{ service.name }}
+                    </span>
+                </h1>
+
+                <!-- Service Description -->
+                <p class="text-2xl text-gray-300 mb-12 leading-relaxed max-w-3xl">
+                    {{ service.short_description }}
+                </p>
+
+                <!-- Service Pricing -->
+                <div class="flex flex-col sm:flex-row items-center gap-8 mb-12">
+                    <div class="bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl p-6 text-center">
+                        <div class="text-sm text-gray-300 mb-2">Starting at</div>
+                        <div class="text-4xl font-black bg-gradient-to-r from-primary-400 to-secondary-400 bg-clip-text text-transparent">
+                            ${{ service.base_price }}
+                        </div>
+                        {% if service.is_recurring %}
+                            <div class="text-sm text-primary-300 mt-2">
+                                <i class="fas fa-sync-alt mr-1"></i>
+                                {{ service.get_recurring_period_display }}
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <!-- CTA Buttons -->
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="{% url 'core:contact' %}" class="bg-gradient-to-r from-primary-600 to-secondary-600 text-white px-8 py-4 rounded-xl font-bold hover:from-primary-500 hover:to-secondary-500 transition-all duration-300 transform hover:scale-105 shadow-lg group relative overflow-hidden">
+                            <!-- Button Shine Effect -->
+                            <div class="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 -skew-x-12 transform -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+                            
+                            <span class="relative flex items-center">
+                                <i class="fas fa-paper-plane mr-2 group-hover:rotate-12 transition-transform duration-300"></i>
+                                Request Quote
+                            </span>
+                        </a>
+                        
+                        <a href="{% url 'services:list' %}" class="bg-white/10 backdrop-blur-lg text-white border border-white/30 px-8 py-4 rounded-xl font-bold hover:bg-white/20 transition-all duration-300 transform hover:scale-105">
+                            <i class="fas fa-arrow-left mr-2"></i>
+                            All Services
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Service Visual -->
+            <div class="lg:w-1/3 text-center reveal" style="animation-delay: 0.3s;">
+                <div class="relative group">
+                    {% if service.icon %}
+                        <!-- Icon Display -->
+                        <div class="w-80 h-80 bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl border border-white/20 rounded-full flex items-center justify-center mx-auto shadow-2xl transform transition-all duration-500 group-hover:scale-110 group-hover:rotate-6 relative overflow-hidden">
+                            <!-- Icon Shine Effect -->
+                            <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -skew-x-12 transform -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+                            
+                            <div class="relative w-32 h-32 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-3xl flex items-center justify-center shadow-lg">
+                                <i class="fas fa-{{ service.icon }} text-6xl text-white"></i>
+                            </div>
+                            
+                            <!-- Floating Indicator -->
+                            <div class="absolute -top-4 -right-4 w-16 h-16 bg-gradient-to-br from-green-400 to-emerald-500 rounded-2xl flex items-center justify-center shadow-lg animate-pulse">
+                                <i class="fas fa-check text-white text-xl"></i>
+                            </div>
+                        </div>
+                    {% elif service.image %}
+                        <!-- Image Display -->
+                        <div class="relative w-80 h-80 mx-auto">
+                            <img src="{{ service.image.url }}" alt="{{ service.name }}" class="w-full h-full object-cover rounded-3xl shadow-2xl transform transition-all duration-500 group-hover:scale-110 group-hover:rotate-3 border-4 border-white/20">
+                            
+                            <!-- Image Overlay -->
+                            <div class="absolute inset-0 bg-gradient-to-t from-gray-900/50 to-transparent rounded-3xl"></div>
+                            
+                            <!-- Floating Badge -->
+                            <div class="absolute -bottom-4 -right-4 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-2xl p-4 shadow-lg">
+                                <i class="fas fa-star text-white text-2xl"></i>
+                            </div>
+                        </div>
+                    {% else %}
+                        <!-- Default Visual -->
+                        <div class="w-80 h-80 bg-gradient-to-br from-primary-500/20 to-secondary-500/20 backdrop-blur-xl border border-white/20 rounded-full flex items-center justify-center mx-auto shadow-2xl">
+                            <div class="w-32 h-32 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-3xl flex items-center justify-center">
+                                <i class="fas fa-cogs text-6xl text-white"></i>
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scroll Indicator -->
+    <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+        <div class="w-8 h-12 border-2 border-white/30 rounded-full flex justify-center">
+            <div class="w-1 h-3 bg-white/50 rounded-full mt-2 animate-pulse"></div>
+        </div>
+    </div>
+</section>
+
+<!-- Premium Service Details -->
+<section class="py-24 bg-gradient-to-b from-white via-gray-50 to-white relative overflow-hidden">
+    <!-- Floating Background Elements -->
+    <div class="absolute inset-0 overflow-hidden">
+        <div class="absolute top-32 right-32 w-96 h-96 bg-gradient-to-br from-primary-100/30 to-secondary-100/30 rounded-full animate-float animation-delay-6000"></div>
+        <div class="absolute bottom-32 left-32 w-80 h-80 bg-gradient-to-tl from-secondary-100/20 to-primary-100/20 rounded-full animate-float animation-delay-10000"></div>
+        
+        <!-- Geometric Elements -->
+        <div class="absolute top-1/2 left-1/4 w-20 h-20 border-2 border-primary-200/40 rounded-3xl rotate-45 animate-spin-slow"></div>
+        <div class="absolute bottom-1/3 right-1/3 w-16 h-16 bg-secondary-200/30 rounded-2xl animate-float animation-delay-8000"></div>
+    </div>
+
+    <div class="container mx-auto px-4 relative z-10">
+        <div class="flex flex-col lg:flex-row gap-16">
+            <!-- Main Content -->
+            <div class="lg:w-2/3">
+                <!-- About Section -->
+                <div class="mb-16 reveal">
+                    <div class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-primary-100 to-secondary-100 rounded-full text-sm font-bold text-gray-700 mb-8">
+                        <i class="fas fa-info-circle mr-2 text-primary-600"></i>
+                        Service Overview
+                    </div>
+                    
+                    <h2 class="text-4xl md:text-5xl font-black text-gray-800 mb-8">
+                        <span class="bg-gradient-to-r from-primary-600 to-secondary-600 bg-clip-text text-transparent">
+                            About This Service
+                        </span>
+                    </h2>
+                    
+                    <div class="bg-white/70 backdrop-blur-lg rounded-3xl p-10 shadow-lg border border-gray-200/50 prose max-w-none">
+                        <div class="text-gray-700 text-lg leading-relaxed">
+                            {{ service.description|linebreaks }}
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Features Section -->
+                {% if features %}
+                <div class="mb-16 reveal">
+                    <h3 class="text-3xl font-black text-gray-800 mb-8">
+                        <span class="bg-gradient-to-r from-primary-600 to-secondary-600 bg-clip-text text-transparent">
+                            What's Included
+                        </span>
+                    </h3>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        {% for feature in features %}
+                            <div class="group bg-white/70 backdrop-blur-lg rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-500 border border-gray-200/50 hover:border-primary-300/50 transform hover:scale-105">
+                                <!-- Feature Icon -->
+                                <div class="flex items-start">
+                                    <div class="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-600 rounded-xl flex items-center justify-center mr-4 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                                        <i class="fas fa-check text-white text-lg"></i>
+                                    </div>
+                                    <div class="flex-1">
+                                        <span class="text-gray-700 font-medium text-lg leading-relaxed">{{ feature }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+                
+                <!-- Packages Section -->
+                {% if packages %}
+                <div class="mb-16 reveal">
+                    <h3 class="text-3xl font-black text-gray-800 mb-8">
+                        <span class="bg-gradient-to-r from-primary-600 to-secondary-600 bg-clip-text text-transparent">
+                            Available Packages
+                        </span>
+                    </h3>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        {% for package in packages %}
+                            <div class="group bg-white/70 backdrop-blur-lg rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-200/50 hover:border-primary-300/50 transform hover:scale-105 relative overflow-hidden">
+                                <!-- Card Shine Effect -->
+                                <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 transform -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+                                
+                                <!-- Package Icon -->
+                                <div class="w-16 h-16 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                                    <i class="fas fa-box text-white text-xl"></i>
+                                </div>
+
+                                <!-- Package Content -->
+                                <div class="relative">
+                                    <h4 class="text-2xl font-bold text-gray-800 mb-4 group-hover:text-primary-600 transition-colors duration-300">
+                                        {{ package.name }}
+                                    </h4>
+                                    <p class="text-gray-600 mb-6 leading-relaxed">
+                                        {{ package.description|truncatewords:20 }}
+                                    </p>
+                                    
+                                    <!-- Package Pricing and CTA -->
+                                    <div class="flex justify-between items-center">
+                                        <div class="text-lg font-black bg-gradient-to-r from-primary-600 to-secondary-600 bg-clip-text text-transparent">
+                                            ${{ package.price }}
+                                        </div>
+                                        <a href="{% url 'services:package_detail' package.slug %}" class="bg-gradient-to-r from-primary-600 to-secondary-600 text-white px-6 py-3 rounded-xl font-bold hover:from-primary-500 hover:to-secondary-500 transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center">
+                                            View Package
+                                            <i class="fas fa-arrow-right ml-2"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+
+                <!-- Testimonials Section -->
+                {% if testimonials %}
+                <div class="mb-16 reveal">
+                    <h3 class="text-3xl font-black text-gray-800 mb-8">
+                        <span class="bg-gradient-to-r from-primary-600 to-secondary-600 bg-clip-text text-transparent">
+                            Client Success Stories
+                        </span>
+                    </h3>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        {% for testimonial in testimonials %}
+                        <div class="group bg-white/70 backdrop-blur-lg rounded-3xl p-8 shadow-lg hover:shadow-xl transition-all duration-500 border border-gray-200/50 hover:border-primary-300/50 relative overflow-hidden">
+                            <!-- Quote Icon -->
+                            <div class="absolute -top-4 -left-4 w-12 h-12 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-2xl flex items-center justify-center shadow-lg">
+                                <i class="fas fa-quote-left text-white text-lg"></i>
+                            </div>
+
+                            <!-- Testimonial Content -->
+                            <div class="relative pt-4">
+                                <p class="text-gray-700 mb-6 text-lg font-medium leading-relaxed italic">
+                                    "{{ testimonial.text }}"
+                                </p>
+                                
+                                <!-- Author Info -->
+                                <div class="flex items-center">
+                                    <img src="{{ testimonial.author_image.url }}" alt="{{ testimonial.author_name }}" class="w-14 h-14 rounded-full mr-4 border-4 border-white shadow-lg">
+                                    <div>
+                                        <h4 class="font-black text-gray-800">{{ testimonial.author_name }}</h4>
+                                        <p class="text-primary-600 font-bold text-sm">{{ testimonial.author_title }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+
+                <!-- FAQs Section -->
+                {% if faqs %}
+                <div class="mb-16 reveal">
+                    <h3 class="text-3xl font-black text-gray-800 mb-8">
+                        <span class="bg-gradient-to-r from-primary-600 to-secondary-600 bg-clip-text text-transparent">
+                            Frequently Asked Questions
+                        </span>
+                    </h3>
+                    
+                    <div class="space-y-4">
+                        {% for faq in faqs %}
+                        <div class="faq-item bg-white/70 backdrop-blur-lg rounded-2xl shadow-lg border border-gray-200/50 overflow-hidden">
+                            <button type="button" class="faq-question w-full text-left px-8 py-6 focus:outline-none flex justify-between items-center hover:bg-white/80 transition-all duration-300 group">
+                                <span class="text-lg font-bold text-gray-800 group-hover:text-primary-600 transition-colors duration-300">{{ faq.question }}</span>
+                                <div class="w-10 h-10 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-xl flex items-center justify-center">
+                                    <svg class="faq-icon w-5 h-5 text-white transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                    </svg>
+                                </div>
+                            </button>
+                            <div class="faq-answer px-8 py-6 border-t border-gray-200/50 hidden">
+                                <div class="text-gray-600 leading-relaxed">{{ faq.answer|linebreaks }}</div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+            
+            <!-- Premium Sidebar -->
+            <div class="lg:w-1/3">
+                <div class="sticky top-8 space-y-8">
+                    <!-- Service Info Card -->
+                    <div class="bg-white/70 backdrop-blur-lg rounded-3xl p-8 shadow-lg border border-gray-200/50 reveal">
+                        <div class="text-center mb-8">
+                            <div class="inline-flex items-center px-4 py-2 bg-gradient-to-r from-primary-100 to-secondary-100 rounded-full text-sm font-bold text-gray-700 mb-4">
+                                <i class="fas fa-info-circle mr-2 text-primary-600"></i>
+                                Service Details
+                            </div>
+                        </div>
+
+                        <!-- Category -->
+                        <div class="mb-8">
+                            <div class="flex items-center mb-3">
+                                <i class="fas fa-tag text-primary-500 mr-3"></i>
+                                <span class="text-gray-600 font-medium">Category</span>
+                            </div>
+                            <span class="inline-block bg-gradient-to-r from-primary-500 to-secondary-500 text-white px-4 py-2 rounded-xl font-bold text-sm shadow-lg">
+                                {{ service.get_category_display }}
+                            </span>
+                        </div>
+
+                        <!-- Pricing -->
+                        <div class="mb-8">
+                            <div class="flex items-center mb-3">
+                                <i class="fas fa-dollar-sign text-primary-500 mr-3"></i>
+                                <span class="text-gray-600 font-medium">Pricing</span>
+                            </div>
+                            <div class="text-4xl font-black bg-gradient-to-r from-primary-600 to-secondary-600 bg-clip-text text-transparent mb-2">
+                                ${{ service.base_price }}
+                            </div>
+                            {% if service.is_recurring %}
+                                <div class="inline-flex items-center bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-bold">
+                                    <i class="fas fa-sync-alt mr-2"></i>
+                                    {{ service.get_recurring_period_display }}
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="space-y-4">
+                            <a href="{% url 'core:contact' %}" class="block w-full bg-gradient-to-r from-primary-600 to-secondary-600 hover:from-primary-500 hover:to-secondary-500 text-white font-bold py-4 px-6 rounded-xl text-center shadow-lg transform hover:scale-105 transition-all duration-300 group relative overflow-hidden">
+                                <!-- Button Shine Effect -->
+                                <div class="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 -skew-x-12 transform -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+                                
+                                <span class="relative flex items-center justify-center">
+                                    <i class="fas fa-paper-plane mr-2 group-hover:rotate-12 transition-transform duration-300"></i>
+                                    Request a Quote
+                                </span>
+                            </a>
+                            
+                            <a href="{% url 'services:list' %}" class="block w-full bg-white/50 backdrop-blur-lg hover:bg-white/70 text-gray-700 border border-gray-300 font-bold py-4 px-6 rounded-xl text-center shadow-lg transform hover:scale-105 transition-all duration-300">
+                                <i class="fas fa-arrow-left mr-2"></i>
+                                Back to Services
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Quick Contact Card -->
+                    <div class="bg-gradient-to-br from-primary-500/10 to-secondary-500/10 backdrop-blur-lg rounded-3xl p-8 border border-primary-200/50 reveal">
+                        <div class="text-center">
+                            <div class="w-16 h-16 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg">
+                                <i class="fas fa-headset text-white text-xl"></i>
+                            </div>
+                            <h4 class="text-xl font-bold text-gray-800 mb-4">Need Help?</h4>
+                            <p class="text-gray-600 mb-6">Our team is ready to discuss your project and provide personalized recommendations.</p>
+                            <a href="{% url 'core:contact' %}" class="inline-flex items-center text-primary-600 font-bold hover:text-primary-700 transition-colors duration-300">
+                                <i class="fas fa-phone mr-2"></i>
+                                Contact Us Now
+                                <i class="fas fa-arrow-right ml-2"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Premium Related Services CTA -->
+<section class="py-24 bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 relative overflow-hidden">
+    <!-- Premium Background Effects -->
+    <div class="absolute inset-0 overflow-hidden">
+        <!-- Animated Mesh Background -->
+        <div class="absolute top-0 left-0 w-full h-full opacity-10">
+            <div class="mesh-gradient animate-pulse"></div>
+        </div>
+        
+        <!-- Floating Elements -->
+        <div class="absolute top-32 right-32 w-96 h-96 bg-gradient-to-br from-primary-500/20 to-secondary-500/20 rounded-full blur-3xl animate-float animation-delay-6000"></div>
+        <div class="absolute bottom-32 left-32 w-80 h-80 bg-gradient-to-tl from-secondary-500/15 to-primary-500/15 rounded-full blur-3xl animate-float animation-delay-10000"></div>
+        
+        <!-- Geometric Shapes -->
+        <div class="absolute top-1/2 left-1/4 w-20 h-20 border-2 border-primary-400/30 rounded-3xl rotate-45 animate-spin-slow"></div>
+        <div class="absolute bottom-1/3 right-1/3 w-16 h-16 bg-secondary-400/20 rounded-2xl animate-float animation-delay-8000"></div>
+    </div>
+
+    <div class="container mx-auto px-4 text-center relative z-10">
+        <div class="max-w-4xl mx-auto reveal">
+            <!-- Badge -->
+            <div class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-primary-500/20 to-secondary-500/20 backdrop-blur-lg border border-primary-400/30 rounded-full text-sm font-bold text-primary-300 mb-8">
+                <i class="fas fa-layer-group mr-2"></i>
+                Explore More Solutions
+            </div>
+
+            <!-- Main Heading -->
+            <h2 class="text-4xl md:text-5xl font-black text-white mb-6">
+                Discover Our 
+                <span class="bg-gradient-to-r from-primary-400 to-secondary-400 bg-clip-text text-transparent">
+                    Complete Portfolio
+                </span>
+            </h2>
+            
+            <!-- Description -->
+            <p class="text-xl text-gray-300 mb-12 max-w-3xl mx-auto leading-relaxed">
+                Explore our full range of premium web development services designed to help your organization 
+                succeed online. From design to deployment, we've got you covered.
+            </p>
+
+            <!-- CTA Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+                <!-- All Services Card -->
+                <div class="group bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl p-8 hover:bg-white/15 transition-all duration-500 transform hover:scale-105 hover:shadow-2xl hover:shadow-primary-500/20 relative overflow-hidden">
+                    <!-- Card Shine Effect -->
+                    <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -skew-x-12 transform -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+                    
+                    <div class="relative">
+                        <div class="w-16 h-16 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                            <i class="fas fa-th-large text-white text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-4 group-hover:text-primary-300 transition-colors duration-300">
+                            All Services
+                        </h3>
+                        <p class="text-gray-300 text-sm leading-relaxed">
+                            Browse our complete service catalog
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Packages Card -->
+                <div class="group bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl p-8 hover:bg-white/15 transition-all duration-500 transform hover:scale-105 hover:shadow-2xl hover:shadow-secondary-500/20 relative overflow-hidden">
+                    <!-- Card Shine Effect -->
+                    <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -skew-x-12 transform -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+                    
+                    <div class="relative">
+                        <div class="w-16 h-16 bg-gradient-to-br from-secondary-500 to-primary-500 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                            <i class="fas fa-box text-white text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-4 group-hover:text-secondary-300 transition-colors duration-300">
+                            Service Packages
+                        </h3>
+                        <p class="text-gray-300 text-sm leading-relaxed">
+                            Save with bundled solutions
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Contact Card -->
+                <div class="group bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl p-8 hover:bg-white/15 transition-all duration-500 transform hover:scale-105 hover:shadow-2xl hover:shadow-primary-500/20 relative overflow-hidden">
+                    <!-- Card Shine Effect -->
+                    <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -skew-x-12 transform -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+                    
+                    <div class="relative">
+                        <div class="w-16 h-16 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                            <i class="fas fa-comments text-white text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-4 group-hover:text-primary-300 transition-colors duration-300">
+                            Custom Quote
+                        </h3>
+                        <p class="text-gray-300 text-sm leading-relaxed">
+                            Get personalized pricing
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main CTA Button -->
+            <a href="{% url 'services:list' %}" class="inline-flex items-center bg-gradient-to-r from-primary-600 to-secondary-600 hover:from-primary-500 hover:to-secondary-500 text-white font-bold py-4 px-8 rounded-xl transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl group relative overflow-hidden">
+                <!-- Button Shine Effect -->
+                <div class="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 -skew-x-12 transform -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+                
+                <span class="relative flex items-center">
+                    <i class="fas fa-rocket mr-3 group-hover:rotate-12 transition-transform duration-300"></i>
+                    View All Services
+                    <i class="fas fa-arrow-right ml-3 group-hover:translate-x-1 transition-transform duration-300"></i>
+                </span>
+            </a>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+{% if faqs %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.faq-question').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                const answer = btn.parentElement.querySelector('.faq-answer');
+                const icon = btn.querySelector('.faq-icon');
+                if (answer.classList.contains('hidden')) {
+                    answer.classList.remove('hidden');
+                    icon.classList.add('rotate-180');
+                } else {
+                    answer.classList.add('hidden');
+                    icon.classList.remove('rotate-180');
+                }
+            });
+        });
+    });
+</script>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register - {{site_name}}</title>
+    {% load static %} 
+    {% load tailwind_tags %} 
+    {% tailwind_css %}
+
+    <link rel="stylesheet" href="{% static "css/fontawesome-free/css/all.css" %}">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  </head>
+  <body class="min-h-screen relative">
+    <!-- Background -->
+    <div class="absolute inset-0 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950"></div>
+    {% comment %} <img src="{% static "image/home1.jpg" %}" alt="" class="absolute inset-0 w-full h-full object-cover opacity-30"> {% endcomment %}
+    
+    <!-- Animated Particles -->
+    <div class="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-hidden">
+        <div class="absolute w-24 h-24 bg-white rounded-full opacity-5 top-16 right-1/4 animate-pulse" style="animation-duration: 5s;"></div>
+        <div class="absolute w-32 h-32 bg-primary-400 rounded-full opacity-10 bottom-32 left-1/4 animate-pulse" style="animation-duration: 7s;"></div>
+        <div class="absolute w-20 h-20 bg-primary-500 rounded-full opacity-10 top-1/2 right-1/6 animate-pulse" style="animation-duration: 6s;"></div>
+        <div class="absolute w-28 h-28 bg-secondary-200 rounded-full opacity-10 top-1/4 left-1/3 animate-pulse" style="animation-duration: 8s;"></div>
+    </div>
+
+    <!-- Grid Pattern Overlay -->
+    <div class="absolute inset-0 opacity-10" style="background-image: linear-gradient(to right, rgba(21, 77, 113, 0.3) 1px, transparent 1px), linear-gradient(to bottom, rgba(21, 77, 113, 0.3) 1px, transparent 1px); background-size: 40px 40px;"></div>
+
+    <!-- Error Messages -->
+    {% if form.errors %}
+    <div class="fixed top-4 right-4 z-50 bg-red-500/20 backdrop-blur-xl border border-red-400/30 text-red-200 rounded-xl shadow-2xl p-4 max-w-sm" data-aos="slide-left">
+      <div class="flex items-start gap-3">
+        <i class="fas fa-exclamation-triangle text-red-400 mt-1"></i>
+        <div>
+          <h4 class="font-semibold mb-1">Registration Error</h4>
+          <p class="text-sm">Please correct the errors below.</p>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+
+    <section class="min-h-screen flex items-center justify-center relative z-10 px-4 py-8">
+      <div class="container mx-auto max-w-6xl">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          
+          <!-- Welcome Section -->
+          <div class="text-white space-y-8" data-aos="fade-right" data-aos-duration="1000">
+            <!-- Logo -->
+            <div class="flex items-center gap-4 mb-8">
+              <div class="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center border border-white/30">
+                <img src="{% static "image/logo.png" %}" alt="WebBuilder" class="w-10 h-10 object-cover rounded-full">
+              </div>
+              <div>
+                <h1 class="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-primary-200">WebBuilder</h1>
+                <p class="text-primary-200/80">Professional Web Solutions</p>
+              </div>
+            </div>
+
+            <!-- Welcome Content -->
+            <div class="space-y-6">
+              <h2 class="text-4xl lg:text-5xl font-bold leading-tight">
+                Join Our 
+                <span class="bg-clip-text text-transparent bg-gradient-to-r from-primary-400 to-primary-300">
+                  Community
+                </span>
+              </h2>
+              <p class="text-xl text-primary-100/90 leading-relaxed">
+                Create your account to access premium web development services and join thousands of satisfied clients.
+              </p>
+              
+              <!-- Features -->
+              <div class="space-y-4 mt-8">
+                <div class="flex items-center gap-3">
+                  <div class="w-8 h-8 bg-primary-500/20 rounded-full flex items-center justify-center">
+                    <i class="fas fa-check text-primary-400 text-sm"></i>
+                  </div>
+                  <span class="text-primary-100">Professional website development</span>
+                </div>
+                <div class="flex items-center gap-3">
+                  <div class="w-8 h-8 bg-primary-500/20 rounded-full flex items-center justify-center">
+                    <i class="fas fa-check text-primary-400 text-sm"></i>
+                  </div>
+                  <span class="text-primary-100">24/7 premium support</span>
+                </div>
+                <div class="flex items-center gap-3">
+                  <div class="w-8 h-8 bg-primary-500/20 rounded-full flex items-center justify-center">
+                    <i class="fas fa-check text-primary-400 text-sm"></i>
+                  </div>
+                  <span class="text-primary-100">Custom solutions for your business</span>
+                </div>
+              </div>
+
+              <!-- Stats -->
+              <div class="grid grid-cols-3 gap-6 mt-12 pt-8 border-t border-white/20">
+                <div class="text-center">
+                  <div class="text-2xl font-bold text-white">500+</div>
+                  <div class="text-sm text-primary-200/80">Projects</div>
+                </div>
+                <div class="text-center">
+                  <div class="text-2xl font-bold text-white">100+</div>
+                  <div class="text-sm text-primary-200/80">Clients</div>
+                </div>
+                <div class="text-center">
+                  <div class="text-2xl font-bold text-white">99%</div>
+                  <div class="text-sm text-primary-200/80">Satisfaction</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Registration Form -->
+          <div class="w-full" data-aos="fade-left" data-aos-duration="1000">
+            <div class="bg-white/10 backdrop-blur-xl rounded-3xl shadow-2xl border border-white/20 p-8 relative overflow-hidden">
+              <!-- Decorative Elements -->
+              <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-primary-400/20 to-transparent rounded-bl-full -mt-8 -mr-8"></div>
+              <div class="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-primary-500/20 to-transparent rounded-tr-full -mb-8 -ml-8"></div>
+
+              <div class="relative z-10">
+                <!-- Header -->
+                <div class="text-center mb-8">
+                  <h3 class="text-2xl font-bold text-white mb-2">Create Account</h3>
+                  <p class="text-primary-200/80">Get started with your free account</p>
+                </div>
+
+                <!-- Login Link -->
+                <div class="text-center mb-6">
+                  <span class="text-primary-200/80">Already have an account? </span>
+                  <a href="{% url 'core:login' %}" class="text-white font-semibold hover:text-primary-300 transition-colors duration-300">
+                    Sign In
+                  </a>
+                </div>
+
+                <!-- Registration Form -->
+                <form method="post" action="{% url 'core:register' %}" class="space-y-6">
+                  {% csrf_token %}
+
+                  <!-- Username and Email Row -->
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="relative">
+                      <label for="{{ form.username.id_for_label }}" class="block text-sm font-medium mb-2 text-primary-100">
+                        <i class="fas fa-user mr-2"></i>Username
+                      </label>
+                      {{ form.username }}
+                      {% if form.username.errors %}
+                        <div class="mt-1 text-red-400 text-sm">
+                          {% for error in form.username.errors %}
+                            <p>{{ error }}</p>
+                          {% endfor %}
+                        </div>
+                      {% endif %}
+                    </div>
+
+                    <div class="relative">
+                      <label for="{{ form.email.id_for_label }}" class="block text-sm font-medium mb-2 text-primary-100">
+                        <i class="fas fa-envelope mr-2"></i>Email
+                      </label>
+                      {{ form.email }}
+                      {% if form.email.errors %}
+                        <div class="mt-1 text-red-400 text-sm">
+                          {% for error in form.email.errors %}
+                            <p>{{ error }}</p>
+                          {% endfor %}
+                        </div>
+                      {% endif %}
+                    </div>
+                  </div>
+
+                  <!-- Password Fields Row -->
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="relative">
+                      <label for="{{ form.password1.id_for_label }}" class="block text-sm font-medium mb-2 text-primary-100">
+                        <i class="fas fa-lock mr-2"></i>Password
+                      </label>
+                      {{ form.password1 }}
+                      {% if form.password1.errors %}
+                        <div class="mt-1 text-red-400 text-sm">
+                          {% for error in form.password1.errors %}
+                            <p>{{ error }}</p>
+                          {% endfor %}
+                        </div>
+                      {% endif %}
+                    </div>
+
+                    <div class="relative">
+                      <label for="{{ form.password2.id_for_label }}" class="block text-sm font-medium mb-2 text-primary-100">
+                        <i class="fas fa-lock mr-2"></i>Confirm Password
+                      </label>
+                      {{ form.password2 }}
+                      {% if form.password2.errors %}
+                        <div class="mt-1 text-red-400 text-sm">
+                          {% for error in form.password2.errors %}
+                            <p>{{ error }}</p>
+                          {% endfor %}
+                        </div>
+                      {% endif %}
+                    </div>
+                  </div>
+
+                  <!-- Terms Checkbox -->
+                  <div class="flex items-start gap-3">
+                    <input type="checkbox" id="terms" required class="mt-1 w-4 h-4 text-primary-600 bg-white/10 border-white/20 rounded focus:ring-primary-500 focus:ring-2">
+                    <label for="terms" class="text-sm text-primary-200/90">
+                      I agree to the 
+                      <a href="#" class="text-white hover:text-primary-300 underline">Terms of Service</a> 
+                      and 
+                      <a href="#" class="text-white hover:text-primary-300 underline">Privacy Policy</a>
+                    </label>
+                  </div>
+
+                  <!-- Register Button -->
+                  <button
+                    type="submit"
+                    class="w-full bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-700 hover:to-primary-600 text-white font-bold py-4 px-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 relative overflow-hidden group"
+                  >
+                    <span class="relative z-10 flex items-center justify-center gap-2">
+                      <i class="fas fa-user-plus"></i>
+                      Create Account
+                    </span>
+                    <div class="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 transform translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
+                  </button>
+                </form>
+
+                <!-- Additional Info -->
+                <div class="mt-6 text-center">
+                  <a href="{% url 'core:home' %}" class="text-primary-200/80 hover:text-white text-sm transition-colors duration-300 flex items-center justify-center gap-2">
+                    <i class="fas fa-home"></i>
+                    Back to Homepage
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      AOS.init({
+        duration: 1000,
+        easing: 'ease-in-out',
+        once: true
+      });
+    </script>
+  </body>
+</html>

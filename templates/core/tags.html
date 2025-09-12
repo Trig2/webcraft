@@ -1,0 +1,228 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Blog Tags - {{site_name}}{% endblock %}
+
+{% block extra_css %}
+<style>
+    .category-section {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-radius: 1rem;
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .category-section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(45deg, rgba(255,255,255,0.1) 25%, transparent 25%, transparent 75%, rgba(255,255,255,0.1) 75%), linear-gradient(45deg, rgba(255,255,255,0.1) 25%, transparent 25%, transparent 75%, rgba(255,255,255,0.1) 75%);
+        background-size: 20px 20px;
+        background-position: 0 0, 10px 10px;
+        opacity: 0.3;
+    }
+    
+    .category-content {
+        position: relative;
+        z-index: 1;
+    }
+    
+    .tag-stats {
+        background: rgba(255,255,255,0.1);
+        backdrop-filter: blur(10px);
+        border-radius: 0.5rem;
+        padding: 1rem;
+        margin-bottom: 2rem;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gray-50">
+    <!-- Header Section -->
+    <div class="bg-gradient-to-br from-blue-600 via-purple-600 to-indigo-700 text-white py-20">
+        <div class="container mx-auto px-4 text-center">
+            <div class="inline-flex items-center bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-medium mb-6">
+                <i class="fas fa-tags mr-2"></i>
+                Blog Tags
+            </div>
+            <h1 class="text-4xl md:text-5xl font-bold mb-6 leading-tight">
+                Explore Topics
+            </h1>
+            <p class="text-xl text-blue-100 max-w-3xl mx-auto leading-relaxed">
+                Discover content organized by technology, category, and expertise level.
+            </p>
+            
+            <!-- Blog Navigation -->
+            <div class="flex justify-center mb-8">
+                <nav class="inline-flex bg-white/10 backdrop-blur-sm rounded-full p-1 shadow-lg">
+                    <a href="{% url 'core:blog_home' %}" class="px-4 py-2 text-blue-200 hover:text-white hover:bg-white/20 rounded-full font-medium transition-all duration-300">Home</a>
+                    <a href="{% url 'core:blog_list' %}" class="px-4 py-2 text-blue-200 hover:text-white hover:bg-white/20 rounded-full font-medium transition-all duration-300">All Posts</a>
+                    <a href="{% url 'core:blog_tags' %}" class="px-4 py-2 bg-white/20 text-white rounded-full font-medium">Browse Tags</a>
+                </nav>
+            </div>
+            
+            <!-- Tag Statistics -->
+            <div class="tag-stats max-w-4xl mx-auto mt-12">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+                    <div>
+                        <div class="text-3xl font-bold text-white">{{ total_tags }}</div>
+                        <div class="text-blue-200 text-sm">Total Tags</div>
+                    </div>
+                    <div>
+                        <div class="text-3xl font-bold text-white">{{ total_posts }}</div>
+                        <div class="text-blue-200 text-sm">Blog Posts</div>
+                    </div>
+                    <div>
+                        <div class="text-3xl font-bold text-white">{{ categories_count }}</div>
+                        <div class="text-blue-200 text-sm">Categories</div>
+                    </div>
+                    <div>
+                        <div class="text-3xl font-bold text-white">{{ featured_tags.count }}</div>
+                        <div class="text-blue-200 text-sm">Featured Tags</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-4 py-16">
+        <!-- Popular Tags Section -->
+        {% if popular_tags %}
+        <div class="mb-16" data-aos="fade-up">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Most Popular Tags</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">
+                    The most frequently used tags across our blog posts.
+                </p>
+            </div>
+            <div class="bg-white rounded-2xl shadow-lg p-8">
+                <div class="flex flex-wrap justify-center gap-4">
+                    {% include 'core/components/enhanced_tags.html' with tags=popular_tags style='icon' %}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- Tags by Category -->
+        <div data-aos="fade-up" data-aos-delay="200">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Browse by Category</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">
+                    Explore tags organized by technology category and domain expertise.
+                </p>
+            </div>
+            
+            {% regroup all_tags by category as category_groups %}
+            {% for category_group in category_groups %}
+            <div class="category-section" data-aos="fade-up" data-aos-delay="{% cycle '100' '200' '300' '400' '500' '600' %}">
+                <div class="category-content">
+                    <div class="flex items-center justify-between mb-6">
+                        <div>
+                            <h3 class="text-2xl font-bold text-white mb-2">
+                                {% if category_group.grouper == 'frontend' %}
+                                    <i class="fab fa-html5 mr-2"></i>Frontend Development
+                                {% elif category_group.grouper == 'backend' %}
+                                    <i class="fas fa-server mr-2"></i>Backend Development  
+                                {% elif category_group.grouper == 'design' %}
+                                    <i class="fas fa-paint-brush mr-2"></i>Design & UX
+                                {% elif category_group.grouper == 'mobile' %}
+                                    <i class="fas fa-mobile-alt mr-2"></i>Mobile Development
+                                {% elif category_group.grouper == 'infrastructure' %}
+                                    <i class="fas fa-cloud mr-2"></i>Infrastructure & DevOps
+                                {% elif category_group.grouper == 'ai' %}
+                                    <i class="fas fa-brain mr-2"></i>AI & Machine Learning
+                                {% elif category_group.grouper == 'security' %}
+                                    <i class="fas fa-shield-alt mr-2"></i>Security
+                                {% elif category_group.grouper == 'quality' %}
+                                    <i class="fas fa-check-circle mr-2"></i>Quality Assurance
+                                {% elif category_group.grouper == 'architecture' %}
+                                    <i class="fas fa-cubes mr-2"></i>Architecture
+                                {% elif category_group.grouper == 'crypto' %}
+                                    <i class="fas fa-link mr-2"></i>Blockchain & Crypto
+                                {% elif category_group.grouper == 'optimization' %}
+                                    <i class="fas fa-tachometer-alt mr-2"></i>Optimization
+                                {% else %}
+                                    <i class="fas fa-code mr-2"></i>General Development
+                                {% endif %}
+                            </h3>
+                            <p class="text-blue-100 text-sm">
+                                {{ category_group.list|length }} tag{{ category_group.list|length|pluralize }} • 
+                                {% with total_posts=0 %}
+                                    {% for tag in category_group.list %}
+                                        {% with total_posts=total_posts|add:tag.post_count %}{% endwith %}
+                                    {% endfor %}
+                                {% endwith %}
+                                {{ total_posts }} post{{ total_posts|pluralize }}
+                            </p>
+                        </div>
+                        <div class="text-4xl text-white/20">
+                            {{ category_group.list|length }}
+                        </div>
+                    </div>
+                    
+                    <div class="flex flex-wrap gap-3">
+                        {% for tag in category_group.list %}
+                        <a href="{% url 'core:blog_list' %}?tag={{ tag.slug }}" 
+                           class="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-white/30 transition-all duration-300 hover:scale-105"
+                           title="{{ tag.description }}">
+                            {% if tag.icon %}
+                            <i class="{{ tag.icon }}"></i>
+                            {% endif %}
+                            <span>{{ tag.name }}</span>
+                            {% if tag.post_count %}
+                            <span class="bg-white/20 px-2 py-1 rounded-full text-xs">{{ tag.post_count }}</span>
+                            {% endif %}
+                        </a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Call to Action -->
+        <div class="text-center mt-16" data-aos="fade-up" data-aos-delay="400">
+            <div class="bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-2xl p-8">
+                <h3 class="text-2xl font-bold mb-4">Start Reading</h3>
+                <p class="text-blue-100 mb-6 max-w-2xl mx-auto">
+                    Ready to dive into our content? Browse all blog posts or filter by your favorite tags.
+                </p>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <a href="{% url 'core:blog_list' %}" 
+                       class="bg-white text-blue-600 px-6 py-3 rounded-full font-semibold hover:bg-blue-50 transition-colors">
+                        <i class="fas fa-list mr-2"></i>All Blog Posts
+                    </a>
+                    <a href="{% url 'core:blog_home' %}" 
+                       class="bg-blue-500 text-white px-6 py-3 rounded-full font-semibold hover:bg-blue-400 transition-colors">
+                        <i class="fas fa-home mr-2"></i>Blog Home
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Add hover effects for tag cards
+    document.querySelectorAll('.category-section').forEach(section => {
+        section.addEventListener('mouseenter', () => {
+            section.style.transform = 'translateY(-4px)';
+            section.style.boxShadow = '0 20px 40px rgba(0,0,0,0.1)';
+        });
+        
+        section.addEventListener('mouseleave', () => {
+            section.style.transform = 'translateY(0)';
+            section.style.boxShadow = '0 10px 20px rgba(0,0,0,0.05)';
+        });
+    });
+</script>
+{% endblock %}

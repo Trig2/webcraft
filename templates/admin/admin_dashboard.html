@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard</title>
+  {% load static %}
+  {% load tailwind_tags %}
+  {% tailwind_css %}
+  <link rel="stylesheet" href="{% static 'css/fontawesome-free/css/all.css' %}">
+</head>
+
+<style>
+  ::-webkit-scrollbar{
+    display: none;
+  }
+</style>
+<body class="">
+  <div class="bg-gray-100 min-h-screen flex flex-col">
+    <aside id="mobile-menu" class="h-screen bg-white fixed -left-[900px] lg:left-0 top-0 max-sm:w-full md:w-[200px] transition-all duration-300 flex flex-col py-2 px-4 z-50">
+      <div class="flex items-center justify-between lg:justify-center">
+        <div class="">
+          <span class="text-md font-bold text-blue-600 mr-1 lg:mr-2">
+            <i class="fas fa-code"></i>
+          </span>
+          <span class="text-md font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-blue-800">
+            WebBuilder
+          </span>
+        </div>
+        <div id="close-mobile-menu" class="w-[30px] h-[30px] lg:hidden flex items-center justify-center rounded-full hover:text-blue-500 text-gray-800">
+          <i class="fas fa-times"></i>
+        </div>
+      </div>
+
+       <nav class="flex flex-col gap-1 mt-4">
+        <!-- Core Dropdown -->
+        <li class="list-none" id="core-dropdown-container">
+          <button id="core-dropdown-btn" type="button" class="flex items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group nav-link dark:text-white hover:bg-blue-200 " aria-controls="core-dropdown-menu" data-collapse-toggle="core-dropdown-menu">
+            <i class="fas fa-cogs text-gray-500 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white w-6 h-6"></i>
+            <span class="flex-1 ml-3 text-left whitespace-nowrap" sidebar-toggle-item>Core</span>
+            <i id="core-dropdown-icon" sidebar-toggle-item class="fas fa-chevron-down w-6 h-6 transition-all duration-200"></i>
+          </button>
+          <ul id="core-dropdown-menu" class="hidden py-2 space-y-2">
+            <li><a href="{% url 'core:activity_logs' %}" class="nav-link flex items-center w-full p-2 text-sm font-normal text-gray-700 bg-white border-b border-blue-100 transition duration-75 rounded-none group hover:bg-blue-100 hover:text-blue-800 pl-11">Activity Logs</a></li>
+            <li><a href="{% url 'core:announcements' %}" class="nav-link flex items-center w-full p-2 text-sm font-normal text-gray-700 bg-white border-b border-blue-100 transition duration-75 rounded-none group hover:bg-blue-100 hover:text-blue-800 pl-11">Announcements</a></li>
+            <li><a href="{% url 'core:contact_messages' %}" class="nav-link flex items-center w-full p-2 text-sm font-normal text-gray-700 bg-white border-b border-blue-100 transition duration-75 rounded-none group hover:bg-blue-100 hover:text-blue-800 pl-11">Contact Messages</a></li>
+            <li><a href="{% url 'core:faqs' %}" class="nav-link flex items-center w-full p-2 text-sm font-normal text-gray-700 bg-white border-b border-blue-100 transition duration-75 rounded-none group hover:bg-blue-100 hover:text-blue-800 pl-11">FAQs</a></li>
+            <li><a href="{% url 'core:newsletter_subscribers' %}" class="nav-link flex items-center w-full p-2 text-sm font-normal text-gray-700 bg-white border-b border-blue-100 transition duration-75 rounded-none group hover:bg-blue-100 hover:text-blue-800 pl-11">Newsletter</a></li>
+            <li><a href="{% url 'core:pages' %}" class="nav-link flex items-center w-full p-2 text-sm font-normal text-gray-700 bg-white border-b border-blue-100 transition duration-75 rounded-none group hover:bg-blue-100 hover:text-blue-800 pl-11">Pages</a></li>
+            <li><a href="{% url 'core:pricing_plans' %}" class="nav-link flex items-center w-full p-2 text-sm font-normal text-gray-700 bg-white border-b border-blue-100 transition duration-75 rounded-none group hover:bg-blue-100 hover:text-blue-800 pl-11">Pricing Plans</a></li>
+            <li><a href="{% url 'core:site_settings' %}" class="nav-link flex items-center w-full p-2 text-sm font-normal text-gray-700 bg-white border-b border-blue-100 transition duration-75 rounded-none group hover:bg-blue-100 hover:text-blue-800 pl-11">Site Settings</a></li>
+            <li><a href="{% url 'core:team_members' %}" class="nav-link flex items-center w-full p-2 text-sm font-normal text-gray-700 bg-white border-b border-blue-100 transition duration-75 rounded-none group hover:bg-blue-100 hover:text-blue-800 pl-11">Team Members</a></li>
+            <li><a href="{% url 'core:testimonials' %}" class="nav-link flex items-center w-full p-2 text-sm font-normal text-gray-700 bg-white transition duration-75 rounded-b-lg group hover:bg-blue-100 hover:text-blue-800 pl-11">Testimonials</a></li>
+          </ul>
+        </li>
+
+        <!-- Projects Dropdown -->
+        <li class="list-none" id="projects-dropdown-container">
+          <button id="projects-dropdown-btn" type="button" class="flex items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group nav-link dark:text-white hover:bg-blue-200  dark:hover:bg-blue-200" aria-controls="projects-dropdown-menu" data-collapse-toggle="projects-dropdown-menu">
+            <i class="fas fa-folder-open text-gray-500 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white w-6 h-6"></i>
+            <span class="flex-1 ml-3 text-left whitespace-nowrap" sidebar-toggle-item>Projects</span>
+            <i id="projects-dropdown-icon" sidebar-toggle-item class="fas fa-chevron-down w-6 h-6 transition-all duration-200"></i>
+          </button>
+          <ul id="projects-dropdown-menu" class="hidden py-2 space-y-2">
+            <li><a href="#" class="nav-link flex items-center w-full p-2 text-sm font-normal text-gray-700 bg-white border-b border-blue-100 transition duration-75 rounded-none group hover:bg-blue-100 hover:text-blue-800 pl-11">Attachments</a></li>
+            <li><a href="#" class="nav-link flex items-center w-full p-2 text-sm font-normal text-gray-700 bg-white border-b border-blue-100 transition duration-75 rounded-none group hover:bg-blue-100 hover:text-blue-800 pl-11">Collaborators</a></li>
+            <li><a href="#" class="nav-link flex items-center w-full p-2 text-sm font-normal text-gray-700 bg-white border-b border-blue-100 transition duration-75 rounded-none group hover:bg-blue-100 hover:text-blue-800 pl-11">Milestones</a></li>
+            <li><a href="#" class="nav-link flex items-center w-full p-2 text-sm font-normal text-gray-700 bg-white border-b border-blue-100 transition duration-75 rounded-none group hover:bg-blue-100 hover:text-blue-800 pl-11">Project Notes</a></li>
+            <li><a href="#" class="nav-link flex items-center w-full p-2 text-sm font-normal text-gray-700 bg-white transition duration-75 rounded-b-lg group hover:bg-blue-100 hover:text-blue-800 pl-11">Projects</a></li>
+          </ul>
+        </li>
+
+        <!-- Services Dropdown -->
+        <li class="list-none" id="services-dropdown-container">
+          <button id="services-dropdown-btn" type="button" class="flex items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group nav-link dark:text-white hover:bg-blue-200 dark:hover:bg-blue-200" aria-controls="services-dropdown-menu" data-collapse-toggle="services-dropdown-menu">
+            <i class="fas fa-concierge-bell text-gray-500 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white w-6 h-6"></i>
+            <span class="flex-1 ml-3 text-left whitespace-nowrap" sidebar-toggle-item>Services</span>
+            <i id="services-dropdown-icon" sidebar-toggle-item class="fas fa-chevron-down w-6 h-6 transition-all duration-200"></i>
+          </button>
+          <ul id="services-dropdown-menu" class="hidden py-2 space-y-2">
+            <li><a href="#" class="nav-link flex items-center w-full p-2 text-sm font-normal text-gray-700 bg-white border-b border-blue-100 transition duration-75 rounded-none group hover:bg-blue-100 hover:text-blue-800 pl-11">Package Services</a></li>
+            <li><a href="#" class="nav-link flex items-center w-full p-2 text-sm font-normal text-gray-700 bg-white border-b border-blue-100 transition duration-75 rounded-none group hover:bg-blue-100 hover:text-blue-800 pl-11">Service FAQs</a></li>
+            <li><a href="#" class="nav-link flex items-center w-full p-2 text-sm font-normal text-gray-700 bg-white border-b border-blue-100 transition duration-75 rounded-none group hover:bg-blue-100 hover:text-blue-800 pl-11">Service Gallerys</a></li>
+            <li><a href="#" class="nav-link flex items-center w-full p-2 text-sm font-normal text-gray-700 bg-white border-b border-blue-100 transition duration-75 rounded-none group hover:bg-blue-100 hover:text-blue-800 pl-11">Service Packages</a></li>
+            <li><a href="#" class="nav-link flex items-center w-full p-2 text-sm font-normal text-gray-700 bg-white border-b border-blue-100 transition duration-75 rounded-none group hover:bg-blue-100 hover:text-blue-800 pl-11">Service Requests</a></li>
+            <li><a href="#" class="nav-link flex items-center w-full p-2 text-sm font-normal text-gray-700 bg-white border-b border-blue-100 transition duration-75 rounded-none group hover:bg-blue-100 hover:text-blue-800 pl-11">Service Reviews</a></li>
+            <li><a href="#" class="nav-link flex items-center w-full p-2 text-sm font-normal text-gray-700 bg-white transition duration-75 rounded-b-lg group hover:bg-blue-100 hover:text-blue-800 pl-11">Services</a></li>
+          </ul>
+        </li>
+        <div class="relative flex items-center justify-between nav-link hover:bg-blue-100 rounded">
+
+        <a href="{% url 'core:home' %}" class="nav-link text-sm block py-2 px-3 rounded hover:bg-blue-100 font-semibold text-blue-700 transition">
+          <i class="fas fa-globe mr-2"></i>Visit Site
+        </a>
+        </nav>
+
+        <!-- Spacer to push social/contact to bottom -->
+              <div class="flex-grow"></div>
+
+         <form method="post" action="{% url 'core:logout' %}" class="mt-2">
+            {% csrf_token %}
+            <button type="submit" class="flex items-center gap-2 text-gray-700 hover:text-white font-sm border-0 p-1.5 bg-red-400 rounded-lg w-full justify-center cursor-pointer"><i class="fas fa-sign-out-alt"></i> Logout</button>
+          </form>
+    </aside>
+
+    
+    <main class="relative left-0 lg:left-[200px] w-full lg:w-[calc(100%-200px)] grow transition-all duration-300">
+      <header class="px-4 py-2 sticky left-0 right-0 top-0 w-full backdrop-blur-3xl flex items-center lg:justify-end justify-between">
+        <div id="mobile-menu-button" class="w-[30px] h-[30px]  hidden max-lg:flex items-center justify-center bg-white rounded-full">
+          <i class="fas fa-bars"></i>
+        </div>
+
+        <div class="">
+          <div class="bg-white rounded-md text-sm p-1 font-semibold"> 
+            {{ request.user.username }}
+          </div>
+        </div>
+      </header>
+
+      {% block admin_content %}
+      {% comment %} cards {% endcomment %}
+      <div class="p-4 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+         <div class="bg-white rounded-md p-4 min-h-32 shadow-md hover:ring-2 hover:ring-blue-800 ring-offset-1 hover:border border-gray-300 flex flex-col justify-between">
+           <div class="flex items-center gap-3">
+             <div class="bg-blue-100 text-blue-700 rounded-full p-2">
+               <i class="fas fa-users fa-lg"></i>
+             </div>
+             <div>
+               <div class="text-xs text-gray-500 font-semibold uppercase">Users</div>
+               <div class="text-2xl font-bold text-gray-800">{{ user_count }}</div>
+             </div>
+           </div>
+           <div class="mt-2 text-xs text-gray-400">Active users this month</div>
+         </div>
+         <div class="bg-white rounded-md p-4 min-h-32 shadow-md hover:ring-2 hover:ring-green-800 ring-offset-1 hover:border border-gray-300 flex flex-col justify-between">
+           <div class="flex items-center gap-3">
+             <div class="bg-green-100 text-green-700 rounded-full p-2">
+               <i class="fas fa-briefcase fa-lg"></i>
+             </div>
+             <div>
+               <div class="text-xs text-gray-500 font-semibold uppercase">Projects</div>
+               <div class="text-2xl font-bold text-gray-800">{{ project_count }}</div>
+             </div>
+           </div>
+           <div class="mt-2 text-xs text-gray-400">Ongoing projects</div>
+         </div>
+         <div class="bg-white rounded-md p-4 min-h-32 shadow-md hover:ring-2 hover:ring-yellow-800 ring-offset-1 hover:border border-gray-300 flex flex-col justify-between">
+           <div class="flex items-center gap-3">
+             <div class="bg-yellow-100 text-yellow-700 rounded-full p-2">
+               <i class="fas fa-concierge-bell fa-lg"></i>
+             </div>
+             <div>
+               <div class="text-xs text-gray-500 font-semibold uppercase">Services</div>
+               <div class="text-2xl font-bold text-gray-800">{{ service_count }}</div>
+             </div>
+           </div>
+           <div class="mt-2 text-xs text-gray-400">Active service offerings</div>
+         </div>
+         <div class="bg-white rounded-md p-4 min-h-32 shadow-md hover:ring-2 hover:ring-purple-800 ring-offset-1 hover:border border-gray-300 flex flex-col justify-between">
+           <div class="flex items-center gap-3">
+             <div class="bg-purple-100 text-purple-700 rounded-full p-2">
+               <i class="fas fa-envelope-open-text fa-lg"></i>
+             </div>
+             <div>
+               <div class="text-xs text-gray-500 font-semibold uppercase">Messages</div>
+               <div class="text-2xl font-bold text-gray-800">{{ message_count }}</div>
+             </div>
+           </div>
+           <div class="mt-2 text-xs text-gray-400">Unread contact messages</div>
+         </div>
+         <div class="bg-white rounded-md p-4 min-h-32 shadow-md hover:ring-2 hover:ring-red-800 ring-offset-1 hover:border border-gray-300 flex flex-col justify-between">
+           <div class="flex items-center gap-3">
+             <div class="bg-red-100 text-red-700 rounded-full p-2">
+               <i class="fas fa-bullhorn fa-lg"></i>
+             </div>
+             <div>
+               <div class="text-xs text-gray-500 font-semibold uppercase">Announcements</div>
+               <div class="text-2xl font-bold text-gray-800">{{ announcements_count }}</div>
+             </div>
+           </div>
+           <div class="mt-2 text-xs text-gray-400">Active announcements</div>
+         </div>
+      </div>
+      {# Announcement Card #}
+      {% if latest_announcement %}
+      <div class="px-4 pb-4">
+        <div class="bg-blue-50 border border-blue-200 rounded-lg p-6 shadow flex flex-col gap-2">
+          <div class="flex items-center gap-2 mb-2">
+            <i class="fas fa-bullhorn text-blue-600"></i>
+            <span class="font-bold text-blue-800 text-lg">{{ latest_announcement.title }}</span>
+          </div>
+          <div class="text-gray-700 text-base">{{ latest_announcement.message }}</div>
+        </div>
+      </div>
+      {% endif %}
+
+      <!-- Dashboard Content Sections -->
+      <div class="px-4 pb-4 grid grid-cols-1 lg:grid-cols-2 gap-4">
+        <!-- Recent Projects -->
+        <div class="bg-white rounded-lg shadow p-4">
+          <h2 class="font-bold text-lg mb-2 flex items-center gap-2"><i class="fas fa-briefcase text-green-600"></i> Recent Projects</h2>
+          <ul>
+            {% for project in recent_projects %}
+              <li class="py-1 border-b last:border-b-0">{{ project.name }} <span class="text-xs text-gray-400">({{ project.created_at|date:'M d, Y' }})</span></li>
+            {% empty %}
+              <li class="text-gray-400">No recent projects.</li>
+            {% endfor %}
+          </ul>
+        </div>
+        <!-- Recent Services -->
+        <div class="bg-white rounded-lg shadow p-4">
+          <h2 class="font-bold text-lg mb-2 flex items-center gap-2"><i class="fas fa-concierge-bell text-yellow-600"></i> Recent Services</h2>
+          <ul>
+            {% for service in recent_services %}
+              <li class="py-1 border-b last:border-b-0">{{ service.name }} <span class="text-xs text-gray-400">({{ service.created_at|date:'M d, Y' }})</span></li>
+            {% empty %}
+              <li class="text-gray-400">No recent services.</li>
+            {% endfor %}
+          </ul>
+        </div>
+        <!-- Recent Messages -->
+        <div class="bg-white rounded-lg shadow p-4">
+          <h2 class="font-bold text-lg mb-2 flex items-center gap-2"><i class="fas fa-envelope text-purple-600"></i> Recent Messages</h2>
+          <ul>
+            {% for msg in recent_messages %}
+              <li class="py-1 border-b last:border-b-0">{{ msg.subject }} from {{ msg.name }} <span class="text-xs text-gray-400">({{ msg.created_at|date:'M d, Y' }})</span></li>
+            {% empty %}
+              <li class="text-gray-400">No recent messages.</li>
+            {% endfor %}
+          </ul>
+        </div>
+        <!-- Team Members -->
+        <div class="bg-white rounded-lg shadow p-4">
+          <h2 class="font-bold text-lg mb-2 flex items-center gap-2"><i class="fas fa-users text-blue-600"></i> Team Members</h2>
+          <ul>
+            {% for member in team_members %}
+              <li class="py-1 border-b last:border-b-0">{{ member.name }} - {{ member.position }}</li>
+            {% empty %}
+              <li class="text-gray-400">No team members.</li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+      <!-- Featured Testimonials -->
+      <div class="px-4 pb-4">
+        <div class="bg-white rounded-lg shadow p-4">
+          <h2 class="font-bold text-lg mb-2 flex items-center gap-2"><i class="fas fa-quote-left text-pink-600"></i> Featured Testimonials</h2>
+          <ul>
+            {% for t in testimonials %}
+              <li class="py-2 border-b last:border-b-0 italic text-gray-700">"{{ t.content }}" <span class="block text-xs text-gray-400 mt-1">- {{ t.client_name }}, {{ t.client_company }}</span></li>
+            {% empty %}
+              <li class="text-gray-400">No testimonials.</li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+
+      <div class="flex flex-col lg:flex-row gap-4 p-4">
+        <div class="w-full lg:w-2/3 flex flex-col gap-4">
+          <!-- Activity Timeline -->
+          <div class="bg-white rounded-lg p-6 shadow-md">
+            <h3 class="text-lg font-bold mb-4 flex items-center gap-2">
+              <i class="fas fa-clock text-blue-600"></i>Recent Activity
+            </h3>
+            <div class="space-y-4">
+              <div class="flex items-start gap-3 p-3 bg-blue-50 rounded-lg">
+                <div class="w-2 h-2 bg-blue-500 rounded-full mt-2"></div>
+                <div>
+                  <p class="font-medium text-gray-800">New project created</p>
+                  <p class="text-sm text-gray-600">{{ recent_projects.0.name|default:"Sample Project" }} was added</p>
+                  <p class="text-xs text-gray-400">2 hours ago</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-3 p-3 bg-green-50 rounded-lg">
+                <div class="w-2 h-2 bg-green-500 rounded-full mt-2"></div>
+                <div>
+                  <p class="font-medium text-gray-800">Service updated</p>
+                  <p class="text-sm text-gray-600">{{ recent_services.0.name|default:"Web Development" }} was modified</p>
+                  <p class="text-xs text-gray-400">4 hours ago</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-3 p-3 bg-purple-50 rounded-lg">
+                <div class="w-2 h-2 bg-purple-500 rounded-full mt-2"></div>
+                <div>
+                  <p class="font-medium text-gray-800">New message received</p>
+                  <p class="text-sm text-gray-600">Contact form submission from {{ recent_messages.0.name|default:"John Doe" }}</p>
+                  <p class="text-xs text-gray-400">6 hours ago</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-3 p-3 bg-yellow-50 rounded-lg">
+                <div class="w-2 h-2 bg-yellow-500 rounded-full mt-2"></div>
+                <div>
+                  <p class="font-medium text-gray-800">Team member added</p>
+                  <p class="text-sm text-gray-600">{{ team_members.0.name|default:"Team Member" }} joined the team</p>
+                  <p class="text-xs text-gray-400">1 day ago</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Performance Overview -->
+          <div class="bg-white rounded-lg p-6 shadow-md">
+            <h3 class="text-lg font-bold mb-4 flex items-center gap-2">
+              <i class="fas fa-chart-line text-green-600"></i>Performance Overview
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div class="text-center p-4 bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg">
+                <div class="text-2xl font-bold text-blue-600">{{ total_reviews|default:0 }}</div>
+                <div class="text-sm text-gray-600">Total Reviews</div>
+                <div class="text-xs text-green-500 mt-1">↗ +12% this month</div>
+              </div>
+              <div class="text-center p-4 bg-gradient-to-br from-green-50 to-green-100 rounded-lg">
+                <div class="text-2xl font-bold text-green-600">{{ active_services|default:0 }}</div>
+                <div class="text-sm text-gray-600">Active Services</div>
+                <div class="text-xs text-green-500 mt-1">↗ +8% this month</div>
+              </div>
+              <div class="text-center p-4 bg-gradient-to-br from-purple-50 to-purple-100 rounded-lg">
+                <div class="text-2xl font-bold text-purple-600">{{ pending_requests|default:0 }}</div>
+                <div class="text-sm text-gray-600">Pending Requests</div>
+                <div class="text-xs text-red-500 mt-1">↘ -5% this month</div>
+              </div>
+            </div>
+            
+            <!-- Simple Progress Bars -->
+            <div class="mt-6 space-y-3">
+              <div>
+                <div class="flex justify-between text-sm mb-1">
+                  <span>Project Completion Rate</span>
+                  <span>85%</span>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-2">
+                  <div class="bg-blue-600 h-2 rounded-full" style="width: 85%"></div>
+                </div>
+              </div>
+              <div>
+                <div class="flex justify-between text-sm mb-1">
+                  <span>Client Satisfaction</span>
+                  <span>92%</span>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-2">
+                  <div class="bg-green-600 h-2 rounded-full" style="width: 92%"></div>
+                </div>
+              </div>
+              <div>
+                <div class="flex justify-between text-sm mb-1">
+                  <span>Service Quality</span>
+                  <span>78%</span>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-2">
+                  <div class="bg-purple-600 h-2 rounded-full" style="width: 78%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="w-full lg:w-1/3 flex flex-col gap-4">
+          <!-- Quick Actions -->
+          <div class="bg-white rounded-lg p-6 shadow-md">
+            <h3 class="text-lg font-bold mb-4 flex items-center gap-2">
+              <i class="fas fa-bolt text-yellow-600"></i>Quick Actions
+            </h3>
+            <div class="space-y-3">
+              <a href="{% url 'core:announcements' %}" class="flex items-center gap-3 p-3 bg-blue-50 hover:bg-blue-100 rounded-lg transition-colors">
+                <i class="fas fa-bullhorn text-blue-600"></i>
+                <span class="font-medium">Create Announcement</span>
+              </a>
+              <a href="{% url 'core:team_members' %}" class="flex items-center gap-3 p-3 bg-green-50 hover:bg-green-100 rounded-lg transition-colors">
+                <i class="fas fa-user-plus text-green-600"></i>
+                <span class="font-medium">Add Team Member</span>
+              </a>
+              <a href="{% url 'core:contact_messages' %}" class="flex items-center gap-3 p-3 bg-purple-50 hover:bg-purple-100 rounded-lg transition-colors">
+                <i class="fas fa-envelope-open text-purple-600"></i>
+                <span class="font-medium">Review Messages</span>
+              </a>
+              <a href="{% url 'core:pricing_plans' %}" class="flex items-center gap-3 p-3 bg-orange-50 hover:bg-orange-100 rounded-lg transition-colors">
+                <i class="fas fa-tags text-orange-600"></i>
+                <span class="font-medium">Manage Pricing</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- System Status -->
+          <div class="bg-white rounded-lg p-6 shadow-md">
+            <h3 class="text-lg font-bold mb-4 flex items-center gap-2">
+              <i class="fas fa-server text-gray-600"></i>System Status
+            </h3>
+            <div class="space-y-3">
+              <div class="flex items-center justify-between">
+                <span class="text-sm">Database</span>
+                <span class="flex items-center gap-2">
+                  <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+                  <span class="text-xs text-green-600">Online</span>
+                </span>
+              </div>
+              <div class="flex items-center justify-between">
+                <span class="text-sm">Storage</span>
+                <span class="flex items-center gap-2">
+                  <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+                  <span class="text-xs text-green-600">85% Free</span>
+                </span>
+              </div>
+              <div class="flex items-center justify-between">
+                <span class="text-sm">Mail Service</span>
+                <span class="flex items-center gap-2">
+                  <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+                  <span class="text-xs text-green-600">Active</span>
+                </span>
+              </div>
+              <div class="flex items-center justify-between">
+                <span class="text-sm">Backup</span>
+                <span class="flex items-center gap-2">
+                  <div class="w-2 h-2 bg-yellow-500 rounded-full"></div>
+                  <span class="text-xs text-yellow-600">Scheduled</span>
+                </span>
+              </div>
+            </div>
+            
+            <!-- Server Info -->
+            <div class="mt-4 pt-4 border-t border-gray-100">
+              <div class="text-xs text-gray-500 space-y-1">
+                <div>Server Time: <span class="font-mono">{% now "Y-m-d H:i:s" %}</span></div>
+                <div>Uptime: <span class="text-green-600">15 days, 8 hours</span></div>
+                <div>Version: <span class="font-mono">Django 5.2.1</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Analytics & Reports Section -->
+      <div class="px-4 pb-4">
+        <div class="bg-white rounded-lg p-6 shadow-md">
+          <h3 class="text-lg font-bold mb-6 flex items-center gap-2">
+            <i class="fas fa-chart-bar text-indigo-600"></i>Analytics & Reports
+          </h3>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- Monthly Stats -->
+            <div class="bg-gradient-to-br from-blue-50 to-blue-100 p-4 rounded-lg">
+              <h4 class="font-semibold text-blue-800 mb-3">This Month</h4>
+              <div class="space-y-2">
+                <div class="flex justify-between">
+                  <span class="text-sm text-gray-600">New Projects:</span>
+                  <span class="font-bold text-blue-600">{{ recent_projects|length }}</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-sm text-gray-600">New Messages:</span>
+                  <span class="font-bold text-blue-600">{{ message_count }}</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-sm text-gray-600">Active Services:</span>
+                  <span class="font-bold text-blue-600">{{ active_services|default:service_count }}</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Client Engagement -->
+            <div class="bg-gradient-to-br from-green-50 to-green-100 p-4 rounded-lg">
+              <h4 class="font-semibold text-green-800 mb-3">Client Engagement</h4>
+              <div class="space-y-2">
+                <div class="flex justify-between">
+                  <span class="text-sm text-gray-600">Response Rate:</span>
+                  <span class="font-bold text-green-600">94%</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-sm text-gray-600">Avg. Rating:</span>
+                  <span class="font-bold text-green-600">4.8/5</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-sm text-gray-600">Satisfaction:</span>
+                  <span class="font-bold text-green-600">92%</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Project Status -->
+            <div class="bg-gradient-to-br from-purple-50 to-purple-100 p-4 rounded-lg">
+              <h4 class="font-semibold text-purple-800 mb-3">Project Status</h4>
+              <div class="space-y-2">
+                <div class="flex justify-between">
+                  <span class="text-sm text-gray-600">In Progress:</span>
+                  <span class="font-bold text-purple-600">{{ project_count|floatformat:0 }}</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-sm text-gray-600">Completed:</span>
+                  <span class="font-bold text-purple-600">127</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-sm text-gray-600">On Hold:</span>
+                  <span class="font-bold text-purple-600">3</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Revenue Metrics -->
+            <div class="bg-gradient-to-br from-orange-50 to-orange-100 p-4 rounded-lg">
+              <h4 class="font-semibold text-orange-800 mb-3">Revenue</h4>
+              <div class="space-y-2">
+                <div class="flex justify-between">
+                  <span class="text-sm text-gray-600">This Month:</span>
+                  <span class="font-bold text-orange-600">$24,500</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-sm text-gray-600">Last Month:</span>
+                  <span class="font-bold text-orange-600">$21,300</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-sm text-gray-600">Growth:</span>
+                  <span class="font-bold text-green-600">+15%</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Progress Charts -->
+          <div class="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div>
+              <h4 class="font-semibold mb-4">Service Distribution</h4>
+              <div class="space-y-3">
+                <div>
+                  <div class="flex justify-between text-sm mb-1">
+                    <span>Web Development</span>
+                    <span>45%</span>
+                  </div>
+                  <div class="w-full bg-gray-200 rounded-full h-2">
+                    <div class="bg-blue-500 h-2 rounded-full" style="width: 45%"></div>
+                  </div>
+                </div>
+                <div>
+                  <div class="flex justify-between text-sm mb-1">
+                    <span>E-commerce</span>
+                    <span>30%</span>
+                  </div>
+                  <div class="w-full bg-gray-200 rounded-full h-2">
+                    <div class="bg-green-500 h-2 rounded-full" style="width: 30%"></div>
+                  </div>
+                </div>
+                <div>
+                  <div class="flex justify-between text-sm mb-1">
+                    <span>Mobile Apps</span>
+                    <span>15%</span>
+                  </div>
+                  <div class="w-full bg-gray-200 rounded-full h-2">
+                    <div class="bg-purple-500 h-2 rounded-full" style="width: 15%"></div>
+                  </div>
+                </div>
+                <div>
+                  <div class="flex justify-between text-sm mb-1">
+                    <span>Consulting</span>
+                    <span>10%</span>
+                  </div>
+                  <div class="w-full bg-gray-200 rounded-full h-2">
+                    <div class="bg-orange-500 h-2 rounded-full" style="width: 10%"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <h4 class="font-semibold mb-4">Client Geography</h4>
+              <div class="space-y-3">
+                <div>
+                  <div class="flex justify-between text-sm mb-1">
+                    <span>United States</span>
+                    <span>60%</span>
+                  </div>
+                  <div class="w-full bg-gray-200 rounded-full h-2">
+                    <div class="bg-red-500 h-2 rounded-full" style="width: 60%"></div>
+                  </div>
+                </div>
+                <div>
+                  <div class="flex justify-between text-sm mb-1">
+                    <span>Canada</span>
+                    <span>20%</span>
+                  </div>
+                  <div class="w-full bg-gray-200 rounded-full h-2">
+                    <div class="bg-blue-500 h-2 rounded-full" style="width: 20%"></div>
+                  </div>
+                </div>
+                <div>
+                  <div class="flex justify-between text-sm mb-1">
+                    <span>Europe</span>
+                    <span>15%</span>
+                  </div>
+                  <div class="w-full bg-gray-200 rounded-full h-2">
+                    <div class="bg-green-500 h-2 rounded-full" style="width: 15%"></div>
+                  </div>
+                </div>
+                <div>
+                  <div class="flex justify-between text-sm mb-1">
+                    <span>Other</span>
+                    <span>5%</span>
+                  </div>
+                  <div class="w-full bg-gray-200 rounded-full h-2">
+                    <div class="bg-yellow-500 h-2 rounded-full" style="width: 5%"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endblock admin_content %}
+
+
+      <footer class="">
+        <div class="bg-white p-4 text-center">
+          footer
+        </div>
+      </footer>
+    </main>
+  </div>
+
+
+  <script>
+    // Services dropdown logic (vertical collapse style)
+    const servicesDropdownBtn = document.getElementById('services-dropdown-btn');
+    const servicesDropdownMenu = document.getElementById('services-dropdown-menu');
+    const servicesDropdownIcon = document.getElementById('services-dropdown-icon');
+    let servicesDropdownOpen = false;
+    servicesDropdownBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      servicesDropdownOpen = !servicesDropdownOpen;
+      if (servicesDropdownOpen) {
+        servicesDropdownMenu.classList.remove('hidden');
+        servicesDropdownIcon.classList.add('rotate-180');
+      } else {
+        servicesDropdownMenu.classList.add('hidden');
+        servicesDropdownIcon.classList.remove('rotate-180');
+      }
+    });
+    // Close dropdown when clicking outside
+    document.addEventListener('click', function(e) {
+      if (!document.getElementById('services-dropdown-container').contains(e.target)) {
+        servicesDropdownMenu.classList.add('hidden');
+        servicesDropdownIcon.classList.remove('rotate-180');
+        servicesDropdownOpen = false;
+      }
+    });
+    // Projects dropdown logic (vertical collapse style)
+    const projectsDropdownBtn = document.getElementById('projects-dropdown-btn');
+    const projectsDropdownMenu = document.getElementById('projects-dropdown-menu');
+    const projectsDropdownIcon = document.getElementById('projects-dropdown-icon');
+    let projectsDropdownOpen = false;
+    projectsDropdownBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      projectsDropdownOpen = !projectsDropdownOpen;
+      if (projectsDropdownOpen) {
+        projectsDropdownMenu.classList.remove('hidden');
+        projectsDropdownIcon.classList.add('rotate-180');
+      } else {
+        projectsDropdownMenu.classList.add('hidden');
+        projectsDropdownIcon.classList.remove('rotate-180');
+      }
+    });
+    // Close dropdown when clicking outside
+    document.addEventListener('click', function(e) {
+      if (!document.getElementById('projects-dropdown-container').contains(e.target)) {
+        projectsDropdownMenu.classList.add('hidden');
+        projectsDropdownIcon.classList.remove('rotate-180');
+        projectsDropdownOpen = false;
+      }
+    });
+    // Mobile menu toggle and close
+    const menu = document.getElementById('mobile-menu');
+    const openBtn = document.getElementById('mobile-menu-button');
+    const closeBtn = document.getElementById('close-mobile-menu');
+    openBtn.addEventListener('click', function() {
+        menu.classList.add('left-0');
+        menu.classList.remove('-left-[900px]');
+        document.body.classList.add("overflow-hidden")
+    });
+    if (closeBtn) {
+        closeBtn.addEventListener('click', function() {
+            menu.classList.remove('left-0');
+            menu.classList.add('-left-[900px]');
+            document.body.classList.remove("overflow-hidden")
+        });
+    }
+
+    // Core dropdown logic (vertical collapse style)
+    const coreDropdownBtn = document.getElementById('core-dropdown-btn');
+    const coreDropdownMenu = document.getElementById('core-dropdown-menu');
+    const coreDropdownIcon = document.getElementById('core-dropdown-icon');
+    let coreDropdownOpen = false;
+    coreDropdownBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      coreDropdownOpen = !coreDropdownOpen;
+      if (coreDropdownOpen) {
+        coreDropdownMenu.classList.remove('hidden');
+        coreDropdownIcon.classList.add('rotate-180');
+      } else {
+        coreDropdownMenu.classList.add('hidden');
+        coreDropdownIcon.classList.remove('rotate-180');
+      }
+    });
+    // Close dropdown when clicking outside
+    document.addEventListener('click', function(e) {
+      if (!document.getElementById('core-dropdown-container').contains(e.target)) {
+        coreDropdownMenu.classList.add('hidden');
+        coreDropdownIcon.classList.remove('rotate-180');
+        coreDropdownOpen = false;
+      }
+    });
+  </script>
+</body>
+</html>

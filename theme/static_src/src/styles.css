@@ -1,0 +1,153 @@
+@import "tailwindcss";
+
+/* Custom Color System */
+@theme {
+  --color-neutral-0: #fff;
+  --color-neutral-50: #f8f9fa;
+  --color-neutral-100: #f2f3f6;
+  --color-neutral-200: #d8dae0;
+  --color-neutral-300: #6d7081;
+  --color-neutral-400: #3b3d4a;
+  --color-neutral-500: #262831;
+  --color-neutral-600: #1d1e20;
+  --color-neutral-700: #161718;
+  --color-neutral-800: #0c0d0d;
+  --color-neutral-900: #000;
+
+  --color-primary-50: #f0f8ff;
+  --color-primary-100: #e1f2ff;
+  --color-primary-200: #bde6ff;
+  --color-primary-300: #80d0ff;
+  --color-primary-400: #33a1e0;
+  --color-primary-500: #1c6ea4;
+  --color-primary-600: #154d71;
+  --color-primary-700: #123f5c;
+  --color-primary-800: #0f334a;
+  --color-primary-900: #0d2a3d;
+  --color-primary-950: #081b28;
+
+  --color-secondary-50: #fffef7;
+  --color-secondary-100: #fffbdf;
+  --color-secondary-200: #fff9af;
+  --color-secondary-300: #fff580;
+  --color-secondary-400: #ffed4a;
+  --color-secondary-500: #ffd700;
+  --color-secondary-600: #e6c200;
+  --color-secondary-700: #cc9f00;
+  --color-secondary-800: #b38600;
+  --color-secondary-900: #996d00;
+  --color-secondary-950: #664a00;
+
+  --color-meteorite-50: #f5f5ff;
+  --color-meteorite-100: #eaeaff;
+  --color-meteorite-200: #cbc8ff;
+  --color-meteorite-300: #b6b2ff;
+  --color-meteorite-400: #a19bff;
+  --color-meteorite-500: #8c85ff;
+
+  --color-light-blue-50: #fafbff;
+  --color-light-blue-100: #f4f5ff;
+  --color-light-blue-200: #d5dfff;
+  --color-light-blue-300: #c3cce9;
+  --color-light-blue-400: #b0b9d4;
+  --color-light-blue-500: #888faa;
+
+  --color-neon-500: #cf0;
+  --color-neon-600: #bded00;
+
+  --color-peridot-500: #0f0;
+  --color-peridot-600: #20e052;
+
+  --color-danger-50: #fff3f7;
+  --color-danger-100: #ffe8ef;
+  --color-danger-200: #fea8c2;
+  --color-danger-300: #fd8bad;
+  --color-danger-400: #fc6e99;
+  --color-danger-500: #fc5185;
+  --color-danger-600: #d63163;
+  --color-danger-700: #b22852;
+
+  --color-warning-100: #fff8e2;
+  --color-warning-200: #ffd28c;
+  --color-warning-500: #ffcd35;
+  --color-warning-600: #fea419;
+  --color-warning-700: #9f6000;
+
+  --color-success-100: #def4f0;
+  --color-success-200: #80d8c8;
+  --color-success-500: #00b090;
+  --color-success-600: #007a5a;
+  --color-success-700: #0d2e29;
+}
+
+/* Custom Component Classes */
+.gradient {
+  @apply bg-gradient-to-br from-primary-600 to-primary-400;
+}
+
+.gradient-bg {
+  @apply bg-gradient-to-br from-primary-800 via-primary-600 to-primary-400;
+}
+
+.gradient-accent {
+  @apply bg-gradient-to-br from-primary-600 via-primary-500 to-secondary-400;
+}
+
+.btn-primary {
+  @apply bg-primary-600 hover:bg-primary-700 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 hover:shadow-lg;
+}
+
+.btn-secondary {
+  @apply bg-secondary-300 text-primary-800 hover:bg-secondary-400 font-semibold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 hover:shadow-lg;
+}
+
+.btn-outline {
+  @apply bg-transparent text-primary-600 hover:bg-primary-600 hover:text-white font-semibold py-3 px-6 rounded-lg border-2 border-primary-600 transition-all duration-300 transform hover:scale-105;
+}
+
+.card {
+  @apply bg-neutral-0 rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 border border-neutral-200;
+}
+
+.nav-link {
+  @apply text-neutral-400 hover:text-primary-600 font-medium transition-colors duration-300 relative;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  background-color: theme('colors.primary.600');
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+/* Utility Classes */
+.text-primary { @apply text-primary-600; }
+.text-secondary { @apply text-meteorite-500; }
+.text-muted { @apply text-neutral-400; }
+.text-success { @apply text-success-500; }
+.text-warning { @apply text-warning-500; }
+.text-danger { @apply text-danger-500; }
+
+.bg-primary { @apply bg-primary-600; }
+.bg-secondary { @apply bg-meteorite-500; }
+.bg-light { @apply bg-neutral-50; }
+.bg-success { @apply bg-success-500; }
+.bg-warning { @apply bg-warning-500; }
+.bg-danger { @apply bg-danger-500; }
+
+/**
+  * A catch-all path to Django template files, JavaScript, and Python files
+  * that contain Tailwind CSS classes and will be scanned by Tailwind to generate the final CSS file.
+  *
+  * If your final CSS file is not being updated after code changes, you may want to broaden or narrow
+  * the scope of this path.
+  */
+@source "../../../**/*.{html,py,js}";

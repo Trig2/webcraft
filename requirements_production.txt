@@ -1,0 +1,31 @@
+# Core Django packages
+Django==5.2.1
+djangorestframework==3.16.0
+django-cors-headers==4.7.0
+django-crispy-forms==2.4
+
+# Production packages
+gunicorn==21.2.0
+whitenoise==6.6.0
+
+# Database (uncomment if using MySQL)
+# mysqlclient==2.2.0
+
+# Image handling
+Pillow==11.2.1
+
+# Environment variables
+python-dotenv==1.1.0
+
+# HTTP requests
+requests==2.32.3
+
+# Async support (optional - only if you're using channels)
+channels==4.2.2
+daphne==4.2.1
+
+# Tailwind (remove in production or keep if you plan to rebuild styles)
+# django-tailwind==4.2.0
+
+# Development only (remove these for production)
+# django-browser-reload==1.18.0

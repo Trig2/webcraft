@@ -1,0 +1,62 @@
+<!-- Simple Chat Widget Template -->
+<div id="chat-widget" class="fixed bottom-4 right-4 w-80 bg-white border rounded shadow-lg z-50">
+    <div class="bg-blue-600 text-white px-4 py-2 rounded-t flex items-center justify-between">
+        <span class="font-bold">Live Chat</span>
+        <button id="chat-close" class="text-white">&times;</button>
+    </div>
+    <div id="chat-messages" class="p-4 h-64 overflow-y-auto text-sm bg-gray-50"></div>
+    <form id="chat-form" class="flex border-t">
+        <input id="chat-input" type="text" class="flex-1 px-2 py-1 border-none focus:outline-none" placeholder="Type a message..." autocomplete="off" />
+        <button type="submit" class="bg-blue-600 text-white px-4 py-1">Send</button>
+    </form>
+</div>
+<script>
+(function() {
+    const chatWidget = document.getElementById('chat-widget');
+    const chatClose = document.getElementById('chat-close');
+    const chatMessages = document.getElementById('chat-messages');
+    const chatForm = document.getElementById('chat-form');
+    const chatInput = document.getElementById('chat-input');
+    let socket = null;
+
+    function appendMessage(username, message) {
+        const msgDiv = document.createElement('div');
+        msgDiv.innerHTML = `<span class="font-semibold">${username}:</span> ${message}`;
+        chatMessages.appendChild(msgDiv);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    function connectWebSocket() {
+        const protocol = window.location.protocol === 'https:' ? 'wss' : 'ws';
+        const wsUrl = `${protocol}://${window.location.host}/ws/chat/`;
+        socket = new WebSocket(wsUrl);
+
+        socket.onmessage = function(e) {
+            const data = JSON.parse(e.data);
+            appendMessage(data.username, data.message);
+        };
+        socket.onclose = function() {
+            setTimeout(connectWebSocket, 2000); // Reconnect on disconnect
+        };
+    }
+
+    chatForm.onsubmit = function(e) {
+        e.preventDefault();
+        const message = chatInput.value.trim();
+        if (message && socket && socket.readyState === WebSocket.OPEN) {
+            socket.send(JSON.stringify({ 'message': message }));
+            chatInput.value = '';
+        }
+    };
+
+    chatClose.onclick = function() {
+        chatWidget.style.display = 'none';
+        if (socket) socket.close();
+    };
+
+    connectWebSocket();
+})();
+</script>
+<style>
+#chat-widget { font-family: inherit; }
+</style>

@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Server Error - {{site_name}}</title>
+    {% load static %}
+    {% load tailwind_tags %}
+    {% tailwind_css %}
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'amiko', sans-serif;
+        }
+        
+        .glitch {
+            animation: glitch 2s infinite;
+        }
+        
+        @keyframes glitch {
+            0%, 100% { transform: translate(0); }
+            10% { transform: translate(-2px, -1px); }
+            20% { transform: translate(2px, 1px); }
+            30% { transform: translate(-1px, 2px); }
+            40% { transform: translate(1px, -2px); }
+            50% { transform: translate(-2px, 1px); }
+            60% { transform: translate(2px, -1px); }
+            70% { transform: translate(-1px, -2px); }
+            80% { transform: translate(1px, 2px); }
+            90% { transform: translate(-2px, -1px); }
+        }
+        
+        .error-code {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .server-icon {
+            animation: blink 1.5s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0.3; }
+        }
+        
+        .circuit-line {
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+            animation: circuit 3s ease-in-out infinite;
+        }
+        
+        @keyframes circuit {
+            0% { stroke-dashoffset: 1000; }
+            50% { stroke-dashoffset: 0; }
+            100% { stroke-dashoffset: -1000; }
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-red-900 via-orange-900 to-yellow-900 relative overflow-hidden">
+    <!-- Background Pattern -->
+    <div class="absolute inset-0 opacity-10">
+        <svg width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="none">
+            <defs>
+                <pattern id="circuit" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+                    <circle cx="10" cy="10" r="1" fill="rgba(255,255,255,0.1)"/>
+                    <line x1="0" y1="10" x2="20" y2="10" stroke="rgba(255,255,255,0.1)" stroke-width="0.5" class="circuit-line"/>
+                    <line x1="10" y1="0" x2="10" y2="20" stroke="rgba(255,255,255,0.1)" stroke-width="0.5" class="circuit-line"/>
+                </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#circuit)"/>
+        </svg>
+    </div>
+
+    <div class="relative z-10 min-h-screen flex items-center justify-center px-4">
+        <div class="max-w-4xl mx-auto text-center">
+            <!-- Error Code -->
+            <div class="mb-8" data-aos="zoom-in" data-aos-duration="1000">
+                <h1 class="text-9xl md:text-[12rem] font-bold error-code mb-4 glitch">500</h1>
+                <div class="w-32 h-1 bg-gradient-to-r from-red-400 to-orange-400 mx-auto rounded-full"></div>
+            </div>
+
+            <!-- Error Message -->
+            <div class="mb-12" data-aos="fade-up" data-aos-delay="300">
+                <h2 class="text-3xl md:text-5xl font-bold text-white mb-6">Server Malfunction</h2>
+                <p class="text-xl text-orange-100 max-w-2xl mx-auto leading-relaxed">
+                    Houston, we have a problem! Our servers are experiencing technical difficulties. 
+                    Our engineering team has been notified and is working on a fix.
+                </p>
+            </div>
+
+            <!-- Server Illustration -->
+            <div class="mb-12" data-aos="fade-up" data-aos-delay="500">
+                <div class="relative inline-block">
+                    <div class="w-64 h-64 mx-auto bg-white/10 backdrop-blur-sm rounded-xl flex flex-col items-center justify-center border border-white/20">
+                        <!-- Server Stack -->
+                        <div class="space-y-2 mb-4">
+                            <div class="w-32 h-6 bg-gray-600 rounded flex items-center justify-between px-2">
+                                <div class="flex space-x-1">
+                                    <div class="w-2 h-2 bg-red-500 rounded-full server-icon"></div>
+                                    <div class="w-2 h-2 bg-yellow-500 rounded-full"></div>
+                                    <div class="w-2 h-2 bg-red-500 rounded-full server-icon"></div>
+                                </div>
+                                <div class="text-xs text-white">SERVER 1</div>
+                            </div>
+                            <div class="w-32 h-6 bg-gray-600 rounded flex items-center justify-between px-2">
+                                <div class="flex space-x-1">
+                                    <div class="w-2 h-2 bg-red-500 rounded-full server-icon"></div>
+                                    <div class="w-2 h-2 bg-red-500 rounded-full server-icon"></div>
+                                    <div class="w-2 h-2 bg-yellow-500 rounded-full"></div>
+                                </div>
+                                <div class="text-xs text-white">SERVER 2</div>
+                            </div>
+                            <div class="w-32 h-6 bg-gray-600 rounded flex items-center justify-between px-2">
+                                <div class="flex space-x-1">
+                                    <div class="w-2 h-2 bg-red-500 rounded-full server-icon"></div>
+                                    <div class="w-2 h-2 bg-red-500 rounded-full server-icon"></div>
+                                    <div class="w-2 h-2 bg-red-500 rounded-full server-icon"></div>
+                                </div>
+                                <div class="text-xs text-white">SERVER 3</div>
+                            </div>
+                        </div>
+                        <i class="fas fa-server text-4xl text-red-400 server-icon"></i>
+                    </div>
+                    
+                    <!-- Warning Icons -->
+                    <div class="absolute -top-6 -right-6 w-16 h-16 bg-red-500/20 rounded-full flex items-center justify-center border border-red-400/30">
+                        <i class="fas fa-exclamation-triangle text-red-300 text-2xl glitch"></i>
+                    </div>
+                    <div class="absolute -bottom-6 -left-6 w-12 h-12 bg-orange-500/20 rounded-full flex items-center justify-center border border-orange-400/30">
+                        <i class="fas fa-tools text-orange-300 text-xl"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Status Message -->
+            <div class="mb-12" data-aos="fade-up" data-aos-delay="700">
+                <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 max-w-2xl mx-auto">
+                    <div class="flex items-center justify-center mb-4">
+                        <div class="w-3 h-3 bg-red-500 rounded-full animate-pulse mr-3"></div>
+                        <h3 class="text-lg font-semibold text-white">System Status</h3>
+                    </div>
+                    <p class="text-orange-100 text-sm">
+                        <strong>Incident:</strong> Internal Server Error<br>
+                        <strong>Status:</strong> Investigating<br>
+                        <strong>ETA:</strong> Working to resolve ASAP
+                    </p>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="space-y-4 md:space-y-0 md:space-x-6 md:flex md:justify-center" data-aos="fade-up" data-aos-delay="900">
+                <a href="{% url 'core:home' %}" 
+                   class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-orange-600 to-red-600 text-white font-semibold rounded-full hover:from-red-600 hover:to-orange-600 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
+                    <i class="fas fa-home mr-3"></i>
+                    Back to Home
+                </a>
+                
+                <button onclick="location.reload()" 
+                        class="inline-flex items-center px-8 py-4 bg-white/10 backdrop-blur-sm text-white font-semibold rounded-full hover:bg-white/20 transition-all duration-300 transform hover:scale-105 border border-white/20">
+                    <i class="fas fa-redo mr-3"></i>
+                    Try Again
+                </button>
+                
+                <a href="{% url 'core:contact' %}" 
+                   class="inline-flex items-center px-8 py-4 bg-yellow-600 hover:bg-yellow-700 text-white font-semibold rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
+                    <i class="fas fa-bug mr-3"></i>
+                    Report Issue
+                </a>
+            </div>
+
+            <!-- Technical Details -->
+            <div class="mt-16 pt-8 border-t border-white/20" data-aos="fade-up" data-aos-delay="1100">
+                <details class="max-w-2xl mx-auto">
+                    <summary class="text-white cursor-pointer hover:text-orange-300 transition-colors">
+                        Technical Details (for developers)
+                    </summary>
+                    <div class="mt-4 p-4 bg-black/30 rounded-lg text-left text-sm text-orange-200 font-mono">
+                        <div>Error: Internal Server Error (500)</div>
+                        <div>Timestamp: {% now "c" %}</div>
+                        <div>Request ID: {{ request.META.HTTP_X_REQUEST_ID|default:"N/A" }}</div>
+                        <div>User Agent: {{ request.META.HTTP_USER_AGENT|truncatechars:50|default:"N/A" }}</div>
+                    </div>
+                </details>
+            </div>
+
+            <!-- Footer -->
+            <div class="mt-16 text-center" data-aos="fade-up" data-aos-delay="1300">
+                <div class="flex items-center justify-center mb-4">
+                    <div class="flex items-center">
+                        <span class="text-2xl font-bold mr-2 text-orange-400">
+                            <i class="fas fa-code"></i>
+                        </span>
+                        <span class="text-xl font-bold text-white">WebBuilder</span>
+                    </div>
+                </div>
+                <p class="text-orange-200/80 text-sm">
+                    Professional Web Development • © {% now "Y" %} All rights reserved
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true
+        });
+
+        // Auto-refresh every 30 seconds
+        setTimeout(() => {
+            const refreshBtn = document.querySelector('button[onclick="location.reload()"]');
+            if (refreshBtn) {
+                refreshBtn.innerHTML = '<i class="fas fa-redo mr-3 animate-spin"></i>Auto Refreshing...';
+                setTimeout(() => location.reload(), 2000);
+            }
+        }, 30000);
+    </script>
+</body>
+</html>
