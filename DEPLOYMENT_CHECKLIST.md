@@ -9,6 +9,7 @@
 ## Upload Your Code 📁
 
 ### Option A: Git (Recommended)
+
 ```bash
 # In PythonAnywhere Bash console:
 cd ~
@@ -17,6 +18,7 @@ cd DjangoProject
 ```
 
 ### Option B: File Upload
+
 - Use Files tab to upload your project folder
 
 ## Environment Setup 🔧
@@ -62,15 +64,18 @@ python manage.py check_deployment --settings=webbuilder.settings_production
 3. **Choose "Manual configuration"**
 4. **Select Python 3.10**
 
-### Configure paths:
+### Configure paths
+
 - **Source code:** `/home/yourusername/DjangoProject`
 - **Working directory:** `/home/yourusername/DjangoProject`
 
-### WSGI Configuration:
+### WSGI Configuration
+
 - Edit the WSGI file and replace content with `wsgi_pythonanywhere.py` content
 - Update `yourusername` in the WSGI file
 
-### Static Files Mapping:
+### Static Files Mapping
+
 | URL      | Directory                                    |
 |----------|----------------------------------------------|
 | /static/ | /home/yourusername/DjangoProject/staticfiles |
@@ -86,16 +91,19 @@ python manage.py check_deployment --settings=webbuilder.settings_production
 ## Troubleshooting 🔧
 
 ### Site not loading?
+
 1. Check error logs in Web tab
 2. Verify ALLOWED_HOSTS setting
 3. Ensure WSGI file is correct
 
 ### Static files not working?
+
 1. Run `collectstatic` again
 2. Check static files mapping
 3. Verify paths are correct
 
 ### 500 errors?
+
 1. Check error logs
 2. Run deployment check: `python manage.py check_deployment`
 3. Verify database migrations
@@ -103,6 +111,7 @@ python manage.py check_deployment --settings=webbuilder.settings_production
 ## Updating Your Site 🔄
 
 When you make changes:
+
 ```bash
 cd ~/DjangoProject
 git pull  # if using Git
@@ -116,9 +125,9 @@ Then click **Reload** in Web tab.
 
 ## Your Site URLs 🌍
 
-- **Main site:** https://yourusername.pythonanywhere.com
-- **Admin panel:** https://yourusername.pythonanywhere.com/admin/
-- **API (if applicable):** https://yourusername.pythonanywhere.com/api/
+- **Main site:** <https://yourusername.pythonanywhere.com>
+- **Admin panel:** <https://yourusername.pythonanywhere.com/admin/>
+- **API (if applicable):** <https://yourusername.pythonanywhere.com/api/>
 
 ---
 

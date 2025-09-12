@@ -1,16 +1,19 @@
 # PythonAnywhere Deployment Guide
 
 ## Prerequisites
-1. Sign up for a PythonAnywhere account at https://www.pythonanywhere.com/
+
+1. Sign up for a PythonAnywhere account at <https://www.pythonanywhere.com/>
 2. Choose a plan (Beginner plan works for most Django projects)
 
 ## Step 1: Upload Your Project
 
 ### Method 1: Using Git (Recommended)
+
 1. Create a repository on GitHub/GitLab with your project
 2. Push your code to the repository
 3. In PythonAnywhere, open a Bash console
 4. Clone your repository:
+
    ```bash
    cd ~
    git clone https://github.com/yourusername/your-repo-name.git DjangoProject
@@ -18,6 +21,7 @@
    ```
 
 ### Method 2: Upload Files
+
 1. Use the Files tab in PythonAnywhere dashboard
 2. Upload your project files to `/home/yourusername/DjangoProject/`
 
@@ -25,6 +29,7 @@
 
 1. Open a Bash console in PythonAnywhere
 2. Create and activate virtual environment:
+
    ```bash
    cd ~/DjangoProject
    python3.10 -m venv .venv
@@ -32,6 +37,7 @@
    ```
 
 3. Install requirements:
+
    ```bash
    pip install -r requirements.txt
    ```
@@ -72,17 +78,20 @@ python manage.py createsuperuser --settings=webbuilder.settings_production
 4. Choose Python 3.10
 5. Set the following configurations:
 
-### Source code:
+### Source code
+
 ```
 /home/yourusername/DjangoProject
 ```
 
-### Working directory:
+### Working directory
+
 ```
 /home/yourusername/DjangoProject
 ```
 
-### WSGI configuration file:
+### WSGI configuration file
+
 Edit the auto-generated WSGI file and replace its contents with the WSGI content provided below.
 
 ## Step 8: Configure Static Files
@@ -97,6 +106,7 @@ In the Web tab, add these static file mappings:
 ## Step 9: Environment Variables (Optional)
 
 If you want to use environment variables:
+
 1. Go to Files tab
 2. Edit `.bashrc` file
 3. Add: `export SECRET_KEY="your-secret-key-here"`
@@ -104,11 +114,11 @@ If you want to use environment variables:
 ## Step 10: Reload and Test
 
 1. Click "Reload" button in Web tab
-2. Visit your site at https://yourusername.pythonanywhere.com
+2. Visit your site at <https://yourusername.pythonanywhere.com>
 
 ## Troubleshooting
 
-### Common Issues:
+### Common Issues
 
 1. **Static files not loading:**
    - Make sure you've run `collectstatic`
@@ -127,7 +137,8 @@ If you want to use environment variables:
    - Verify all requirements are installed
    - Check Python version compatibility
 
-### Checking Logs:
+### Checking Logs
+
 - Error logs: Available in Web tab
 - Access logs: Available in Web tab
 - Django logs: Check the file specified in logging configuration

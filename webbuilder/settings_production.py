@@ -28,11 +28,16 @@ STATIC_ROOT = '/home/yourusername/DjangoProject/staticfiles'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = '/home/yourusername/DjangoProject/media'
 
-# Disable Tailwind in production (no Node.js needed)
-INSTALLED_APPS = [app for app in INSTALLED_APPS if app not in ['tailwind', 'theme']]
-
-# Disable channels for simpler deployment (uncomment if you need WebSocket support)
-INSTALLED_APPS = [app for app in INSTALLED_APPS if app != 'channels']
+# Remove development-only apps from INSTALLED_APPS
+INSTALLED_APPS = [
+    app for app in INSTALLED_APPS 
+    if app not in [
+        'tailwind', 
+        'theme', 
+        'channels',
+        'django_browser_reload'  # Remove browser reload app
+    ]
+]
 CHANNEL_LAYERS = {}
 
 # Security settings for production

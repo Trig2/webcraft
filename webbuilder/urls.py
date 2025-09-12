@@ -36,10 +36,18 @@ urlpatterns = [
 
     # Django Auth URLs
     # path('accounts/', include('django.contrib.auth.urls')),
-
-    # Tailwind (development only)
-    path("__reload__/", include("django_browser_reload.urls")),
 ]
+
+# Development-only URLs
+if settings.DEBUG:
+    # Tailwind browser reload (development only)
+    try:
+        urlpatterns += [
+            path("__reload__/", include("django_browser_reload.urls")),
+        ]
+    except ImportError:
+        # django_browser_reload not installed, skip
+        pass
 
 # Error handlers
 handler404 = 'core.views.custom_404'
