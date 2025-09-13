@@ -6,7 +6,7 @@ databases:
 services:
   - type: web
     name: webcraft
-    runtime: python3
+    env: python
     buildCommand: "./build.sh"
     startCommand: "gunicorn webbuilder.wsgi:application"
     envVars:
