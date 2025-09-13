@@ -118,14 +118,23 @@ CHANNEL_LAYERS = {
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
 if ENVIRONMENT == 'production':
-    # Use DATABASE_URL for Render (automatically configured)
-    DATABASES = {
-        'default': dj_database_url.config(
-            default='sqlite:///db.sqlite3',
-            conn_max_age=600,
-            conn_health_checks=True,
-        )
-    }
+    # Option 1: Use PostgreSQL (recommended for production)
+    if os.environ.get('DATABASE_URL'):
+        DATABASES = {
+            'default': dj_database_url.config(
+                default='sqlite:///db.sqlite3',
+                conn_max_age=600,
+                conn_health_checks=True,
+            )
+        }
+    else:
+        # Option 2: Use SQLite in production (simpler setup)
+        DATABASES = {
+            "default": {
+                "ENGINE": "django.db.backends.sqlite3",
+                "NAME": "/opt/render/project/src/db.sqlite3",
+            }
+        }
 else:
     # Development database
     DATABASES = {
