@@ -36,8 +36,8 @@ ALLOWED_HOSTS = ['webcraft.pythonanywhere.com', 'localhost', '127.0.0.1']
 if ENVIRONMENT == 'production':
     # Allow all Render.com subdomains
     ALLOWED_HOSTS.extend(['.onrender.com'])
-    # Add your specific Render URL when you get it
-    # ALLOWED_HOSTS.append('your-app-name.onrender.com')
+    # Add your specific Render URL
+    ALLOWED_HOSTS.append('webcraft-pteo.onrender.com')
 
 
 # Application definition
