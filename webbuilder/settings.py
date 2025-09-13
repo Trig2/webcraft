@@ -30,14 +30,15 @@ SECRET_KEY = os.environ.get('SECRET_KEY', "django-insecure-ssl3t=5ki)79uo@q3-!9d
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = ENVIRONMENT == 'development'
 
-ALLOWED_HOSTS = ['webcraft.pythonanywhere.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['webcraft.pythonanywhere.com', 'localhost', '127.0.0.1', 'webcraft-pteo.onrender.com']
 
 # Add Render.com support
 if ENVIRONMENT == 'production':
     # Allow all Render.com subdomains
     ALLOWED_HOSTS.extend(['.onrender.com'])
-    # Add your specific Render URL
-    ALLOWED_HOSTS.append('webcraft-pteo.onrender.com')
+else:
+    # Also allow Render URL in development mode (fallback)
+    ALLOWED_HOSTS.extend(['.onrender.com'])
 
 
 # Application definition
