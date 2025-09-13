@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 from pathlib import Path
 import os
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -30,6 +31,13 @@ SECRET_KEY = os.environ.get('SECRET_KEY', "django-insecure-ssl3t=5ki)79uo@q3-!9d
 DEBUG = ENVIRONMENT == 'development'
 
 ALLOWED_HOSTS = ['webcraft.pythonanywhere.com', 'localhost', '127.0.0.1']
+
+# Add Render.com support
+if ENVIRONMENT == 'production':
+    # Allow all Render.com subdomains
+    ALLOWED_HOSTS.extend(['.onrender.com'])
+    # Add your specific Render URL when you get it
+    # ALLOWED_HOSTS.append('your-app-name.onrender.com')
 
 
 # Application definition
@@ -60,6 +68,7 @@ NPM_BIN_PATH = "npm"  # Path to npm executable
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",  # Add WhiteNoise for static files
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -109,13 +118,16 @@ CHANNEL_LAYERS = {
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
 if ENVIRONMENT == 'production':
+    # Use DATABASE_URL for Render (automatically configured)
     DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.sqlite3",
-            "NAME": "/home/webcraft/mysite/db.sqlite3",
-        }
+        'default': dj_database_url.config(
+            default='sqlite:///db.sqlite3',
+            conn_max_age=600,
+            conn_health_checks=True,
+        )
     }
 else:
+    # Development database
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.sqlite3",
@@ -161,8 +173,12 @@ USE_TZ = True
 STATIC_URL = "/static/"
 
 if ENVIRONMENT == 'production':
-    STATIC_ROOT = "/home/webcraft/mysite/staticfiles"
-    MEDIA_ROOT = "/home/webcraft/mysite/media"
+    # Render static files configuration
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+    MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+    
+    # Enable WhiteNoise for static file serving on Render
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 else:
     STATIC_ROOT = BASE_DIR / "staticfiles"
     MEDIA_ROOT = BASE_DIR / "media"
@@ -184,3 +200,15 @@ NPM_BIN_PATH = r"C:\Program Files\nodejs\npm.cmd"
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# Production security settings
+if ENVIRONMENT == 'production':
+    SECURE_BROWSER_XSS_FILTER = True
+    SECURE_CONTENT_TYPE_NOSNIFF = True
+    SECURE_HSTS_SECONDS = 31536000
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_HSTS_PRELOAD = True
+    X_FRAME_OPTIONS = 'DENY'
+    SECURE_SSL_REDIRECT = True
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True

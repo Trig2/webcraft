@@ -1,0 +1,21 @@
+databases:
+  - name: webcraft-db
+    databaseName: webcraft
+    user: webcraft
+
+services:
+  - type: web
+    name: webcraft
+    runtime: python3
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn webbuilder.wsgi:application"
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: webcraft-db
+          property: connectionString
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DJANGO_ENVIRONMENT
+        value: production
+    autoDeploy: false
