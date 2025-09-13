@@ -1,11 +1,11 @@
 # WSGI configuration for PythonAnywhere
-# Replace 'yourusername' with your actual PythonAnywhere username
+# Django web application configuration
 
 import os
 import sys
 
 # Add your project directory to the Python path
-path = '/home/yourusername/DjangoProject'
+path = '/home/webcraft/mysite'
 if path not in sys.path:
     sys.path.insert(0, path)
 
