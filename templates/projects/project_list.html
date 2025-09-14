@@ -544,7 +544,7 @@
                                 {% endif %}
                                 
                                 <!-- View Details Button -->
-                                <a href="{% url 'projects:detail' project.id %}" 
+                                <a href="{% url 'projects:detail' project.slug %}" 
                                    class="{% if not project.live_url and not project.github_url %}w-full{% else %}flex-1{% endif %} group/btn relative overflow-hidden bg-white/70 backdrop-blur-lg hover:bg-white/90 text-gray-800 hover:text-primary-700 text-center py-4 px-6 rounded-2xl font-bold text-sm transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl border border-gray-200 hover:border-primary-300">
                                     <div class="relative flex items-center justify-center">
                                         <i class="fas fa-arrow-right mr-2 group-hover/btn:translate-x-1 transition-transform duration-300"></i>

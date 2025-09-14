@@ -16,3 +16,6 @@ python manage.py migrate
 
 # Create sample projects if needed
 python manage.py create_sample_projects
+
+# Generate slugs for projects
+python manage.py generate_project_slugs

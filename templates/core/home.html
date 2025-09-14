@@ -878,7 +878,7 @@
             {% endif %}
           </div>
           
-          <a href="{% url 'projects:detail' projects.id %}" class="inline-flex items-center font-semibold text-primary-600 hover:text-secondary-600 transition-all duration-300 group/link">
+          <a href="{% url 'projects:detail' projects.slug %}" class="inline-flex items-center font-semibold text-primary-600 hover:text-secondary-600 transition-all duration-300 group/link">
             View Project Details
             <i class="fas fa-arrow-right ml-2 transform group-hover/link:translate-x-2 transition-transform duration-300"></i>
           </a>

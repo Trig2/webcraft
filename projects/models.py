@@ -1,6 +1,8 @@
 from django.db import models
 from django.utils import timezone
 from django.conf import settings
+from django.utils.text import slugify
+from django.urls import reverse
 
 
 # Create your models here.
@@ -32,6 +34,7 @@ class Project(models.Model):
 
     # Project Details
     title = models.CharField(max_length=255)
+    slug = models.SlugField(max_length=255, unique=True, blank=True, null=True)
     description = models.TextField()
     project_type = models.CharField(
         max_length=20, choices=PROJECT_TYPE_CHOICES, default="custom"
@@ -76,6 +79,22 @@ class Project(models.Model):
 
     def __str__(self):
         return f"{self.title} - {self.client_name} - {self.project_type}"
+
+    def save(self, *args, **kwargs):
+        """Auto-generate slug from title if not provided"""
+        if not self.slug:
+            base_slug = slugify(self.title)
+            slug = base_slug
+            counter = 1
+            while Project.objects.filter(slug=slug).exists():
+                slug = f"{base_slug}-{counter}"
+                counter += 1
+            self.slug = slug
+        super().save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        """Return the URL for this project"""
+        return reverse('projects:detail', kwargs={'slug': self.slug})
 
     def add_collaborator(self, user, role=None):
         """Add a collaborator to this project"""

@@ -270,7 +270,7 @@ def home(request):
     # Get team members
     team_members = TeamMember.objects.filter(is_active=True)[:6]
 
-    featured_projects = Project.objects.filter(is_featured=True)[:6]
+    featured_projects = Project.objects.filter(is_featured=True, status="completed").exclude(slug__isnull=True)[:6]
 
     # Get FAQs
     faqs = FAQ.objects.filter(is_active=True)[:6]

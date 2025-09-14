@@ -51,13 +51,13 @@ def project_list(request):
     return render(request, "projects/project_list.html", context)
 
 
-def project_detail(request, project_id):
-    """View for displaying project details with graceful error handling"""
+def project_detail(request, slug):
+    """View for displaying project details using slug"""
     try:
-        project = get_object_or_404(Project, id=project_id, status="completed")
+        project = get_object_or_404(Project, slug=slug, status="completed")
     except:
         # If project doesn't exist, redirect to portfolio with a friendly message
-        messages.info(request, f"The project you're looking for (#{project_id}) is not available. Please browse our other projects below.")
+        messages.info(request, f"The project you're looking for is not available. Please browse our other projects below.")
         return redirect('projects:list')
 
     # Get all collaborators for this project using the new helper method
@@ -98,3 +98,15 @@ def project_detail(request, project_id):
     }
 
     return render(request, "projects/project_detail.html", context)
+
+
+def project_detail_by_id(request, project_id):
+    """Legacy view for ID-based URLs - redirects to slug-based URL"""
+    try:
+        project = get_object_or_404(Project, id=project_id, status="completed")
+        # Redirect to slug-based URL
+        return redirect('projects:detail', slug=project.slug)
+    except:
+        # If project doesn't exist, redirect to portfolio with a friendly message
+        messages.info(request, f"The project you're looking for (#{project_id}) is not available. Please browse our other projects below.")
+        return redirect('projects:list')
