@@ -13,3 +13,6 @@ python manage.py collectstatic --no-input
 
 # Run migrations
 python manage.py migrate
+
+# Create sample projects if needed
+python manage.py create_sample_projects

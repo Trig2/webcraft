@@ -35,12 +35,14 @@ The project consists of the following Django apps:
 ### Installation
 
 1. Clone the repository:
+
    ```
    git clone <repository-url>
    cd webbuilder
    ```
 
 2. Create and activate a virtual environment:
+
    ```
    python -m venv .venv
    .venv\Scripts\activate  # On Windows
@@ -48,42 +50,48 @@ The project consists of the following Django apps:
    ```
 
 3. Install Python dependencies:
+
    ```
    pip install -r requirements.txt
    ```
 
 4. Install Tailwind CSS dependencies:
+
    ```
    python manage.py tailwind install
    ```
 
 5. Apply database migrations:
+
    ```
    python manage.py migrate
    ```
 
 6. Create a superuser:
+
    ```
    python manage.py createsuperuser
    ```
 
 7. Start the development server:
+
    ```
    python manage.py runserver
    ```
 
 8. In a separate terminal, start the Tailwind CSS watcher:
+
    ```
    python manage.py tailwind start
    ```
 
-9. Access the site at http://127.0.0.1:8000/
+9. Access the site at <http://127.0.0.1:8000/>
 
 ## Usage
 
 ### Admin Interface
 
-Access the admin interface at http://127.0.0.1:8000/admin/ to:
+Access the admin interface at <http://127.0.0.1:8000/admin/> to:
 
 - Add/edit services and service packages
 - Manage projects in your portfolio
