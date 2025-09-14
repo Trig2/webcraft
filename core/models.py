@@ -48,6 +48,10 @@ class SiteSetting(models.Model):
     twitter = models.URLField(blank=True, null=True)
     linkedin = models.URLField(blank=True, null=True)
     instagram = models.URLField(blank=True, null=True)
+    maintenance_mode = models.BooleanField(
+        default=False, 
+        help_text="Enable this to put the site in maintenance mode. Only admins will be able to access the site."
+    )
     updated_at = models.DateTimeField(auto_now=True)
     about = models.TextField(max_length=1000,blank=True,null=True)
 
@@ -539,3 +543,52 @@ class ConversionTracking(models.Model):
 
     class Meta:
         ordering = ["-timestamp"]
+
+
+class QuickInquiry(models.Model):
+    """Model for quick inquiries from the home page form"""
+    PROJECT_TYPE_CHOICES = [
+        ("website", "Website Development"),
+        ("ecommerce", "E-commerce Solution"),
+        ("webapp", "Web Application"),
+        ("mobile", "Mobile App"),
+        ("redesign", "Website Redesign"),
+        ("other", "Other"),
+    ]
+    
+    BUDGET_CHOICES = [
+        ("under-5k", "Under $5,000"),
+        ("5k-10k", "$5,000 - $10,000"),
+        ("10k-25k", "$10,000 - $25,000"),
+        ("25k-50k", "$25,000 - $50,000"),
+        ("50k-plus", "$50,000+"),
+    ]
+    
+    STATUS_CHOICES = [
+        ("new", "New"),
+        ("contacted", "Contacted"),
+        ("quoted", "Quote Sent"),
+        ("in_progress", "In Progress"),
+        ("completed", "Completed"),
+        ("lost", "Lost"),
+    ]
+
+    name = models.CharField(max_length=255)
+    email = models.EmailField()
+    project_type = models.CharField(max_length=20, choices=PROJECT_TYPE_CHOICES)
+    message = models.TextField()
+    budget = models.CharField(max_length=20, choices=BUDGET_CHOICES, blank=True, null=True)
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default="new")
+    notes = models.TextField(blank=True, null=True, help_text="Internal notes for follow-up")
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    contacted_at = models.DateTimeField(blank=True, null=True)
+    ip_address = models.GenericIPAddressField(blank=True, null=True)
+
+    def __str__(self):
+        return f"{self.name} - {self.get_project_type_display()}"
+
+    class Meta:
+        ordering = ["-created_at"]
+        verbose_name = "Quick Inquiry"
+        verbose_name_plural = "Quick Inquiries"

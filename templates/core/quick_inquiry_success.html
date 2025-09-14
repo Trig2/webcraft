@@ -1,0 +1,308 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Quick Inquiry Sent - {{site_name}}{% endblock %}
+
+{% block content %}
+<!-- Success Header -->
+<section class="bg-gradient-to-br from-primary-900 via-primary-800 to-gray-900 text-white py-20 relative overflow-hidden">
+    <!-- Background Elements -->
+    <div class="absolute inset-0 overflow-hidden pointer-events-none">
+        <div class="absolute top-20 left-20 w-72 h-72 bg-gradient-to-br from-secondary-500/20 to-primary-500/10 rounded-full blur-3xl animate-float"></div>
+        <div class="absolute bottom-20 right-20 w-80 h-80 bg-gradient-to-br from-primary-500/20 to-secondary-400/10 rounded-full blur-3xl animate-float animation-delay-8000"></div>
+    </div>
+    
+    <div class="container mx-auto px-4 text-center relative z-10">
+        <div class="inline-flex items-center justify-center w-24 h-24 bg-green-500 rounded-full mx-auto mb-8 shadow-2xl">
+            <i class="fas fa-check text-white text-3xl"></i>
+        </div>
+        <h1 class="text-4xl md:text-6xl font-bold mb-6">
+            <span class="bg-gradient-to-r from-secondary-400 to-secondary-500 bg-clip-text text-transparent">Success!</span>
+        </h1>
+        <p class="text-xl md:text-2xl max-w-3xl mx-auto leading-relaxed text-gray-300">
+            Your quick inquiry has been received. We'll get back to you within 2 hours!
+        </p>
+    </div>
+</section>
+
+<!-- Success Content -->
+<section class="py-20">
+    <div class="container mx-auto px-4 text-center">
+        <div class="max-w-4xl mx-auto">
+            <!-- Inquiry Summary -->
+            <div class="bg-white rounded-3xl p-8 shadow-xl border border-gray-100 mb-16">
+                <h2 class="text-3xl font-bold mb-8 text-gray-800">Your Inquiry Details</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
+                    <div>
+                        <h3 class="text-lg font-semibold text-gray-700 mb-2">Contact Information</h3>
+                        <div class="space-y-2">
+                            <p><span class="font-medium">Name:</span> {{ inquiry.name }}</p>
+                            <p><span class="font-medium">Email:</span> {{ inquiry.email }}</p>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold text-gray-700 mb-2">Project Details</h3>
+                        <div class="space-y-2">
+                            <p><span class="font-medium">Project Type:</span> {{ inquiry.get_project_type_display }}</p>
+                            {% if inquiry.budget %}
+                            <p><span class="font-medium">Budget Range:</span> {{ inquiry.get_budget_display }}</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                {% if inquiry.message %}
+                <div class="mt-8 pt-8 border-t border-gray-200">
+                    <h3 class="text-lg font-semibold text-gray-700 mb-4">Your Message</h3>
+                    <div class="bg-gray-50 rounded-xl p-6 text-gray-700 leading-relaxed">
+                        {{ inquiry.message }}
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+            
+            <!-- What's Next Section -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+                <!-- Step 1 -->
+                <div class="bg-white rounded-2xl shadow-lg p-8 text-center border border-gray-100 hover:shadow-xl transition-shadow duration-300">
+                    <div class="w-16 h-16 bg-gradient-to-br from-yellow-400 to-yellow-500 rounded-full flex items-center justify-center text-white mx-auto mb-6 shadow-lg">
+                        <span class="text-xl font-bold">1</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 text-gray-800">Quick Review</h3>
+                    <p class="text-gray-600 leading-relaxed">Our team will review your inquiry and gather any additional information needed for your project.</p>
+                </div>
+                
+                <!-- Step 2 -->
+                <div class="bg-white rounded-2xl shadow-lg p-8 text-center border border-gray-100 hover:shadow-xl transition-shadow duration-300">
+                    <div class="w-16 h-16 bg-gradient-to-br from-yellow-400 to-yellow-500 rounded-full flex items-center justify-center text-white mx-auto mb-6 shadow-lg">
+                        <span class="text-xl font-bold">2</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 text-gray-800">Fast Response</h3>
+                    <p class="text-gray-600 leading-relaxed">We'll respond within 2 hours with initial insights, questions, or a proposed solution.</p>
+                </div>
+                
+                <!-- Step 3 -->
+                <div class="bg-white rounded-2xl shadow-lg p-8 text-center border border-gray-100 hover:shadow-xl transition-shadow duration-300">
+                    <div class="w-16 h-16 bg-gradient-to-br from-yellow-400 to-yellow-500 rounded-full flex items-center justify-center text-white mx-auto mb-6 shadow-lg">
+                        <span class="text-xl font-bold">3</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 text-gray-800">Detailed Discussion</h3>
+                    <p class="text-gray-600 leading-relaxed">If needed, we'll schedule a consultation to discuss your project in detail and provide a custom quote.</p>
+                </div>
+            </div>
+            
+            <!-- Action Buttons -->
+            <div class="flex flex-col sm:flex-row justify-center gap-6">
+                <a href="{% url 'services:list' %}" class="bg-gradient-to-r from-yellow-500 to-yellow-400 hover:from-yellow-400 hover:to-yellow-300 text-yellow-900 font-bold py-4 px-8 rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-xl">
+                    <i class="fas fa-cogs mr-2"></i>
+                    Explore Our Services
+                </a>
+                <a href="{% url 'projects:list' %}" class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-4 px-8 rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-lg">
+                    <i class="fas fa-portfolio mr-2"></i>
+                    View Our Portfolio
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="py-20 bg-gradient-to-br from-gray-50 to-gray-100">
+    <div class="container mx-auto px-4">
+        <h2 class="text-3xl md:text-4xl font-bold mb-16 text-center text-gray-800">Why Choose Us?</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+            <!-- Fast Response -->
+            <div class="bg-white rounded-2xl shadow-lg p-8 text-center border border-gray-100">
+                <div class="w-16 h-16 bg-gradient-to-br from-green-400 to-green-500 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg">
+                    <i class="fas fa-bolt text-white text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-4 text-gray-800">Lightning Fast Response</h3>
+                <p class="text-gray-600 leading-relaxed">We respond to all inquiries within 2 hours during business hours. Your time is valuable to us.</p>
+            </div>
+            
+            <!-- Free Consultation -->
+            <div class="bg-white rounded-2xl shadow-lg p-8 text-center border border-gray-100">
+                <div class="w-16 h-16 bg-gradient-to-br from-blue-400 to-blue-500 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg">
+                    <i class="fas fa-gift text-white text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-4 text-gray-800">Free Consultation</h3>
+                <p class="text-gray-600 leading-relaxed">No strings attached - just honest advice and insights to help you make the best decisions.</p>
+            </div>
+            
+            <!-- Expert Team -->
+            <div class="bg-white rounded-2xl shadow-lg p-8 text-center border border-gray-100">
+                <div class="w-16 h-16 bg-gradient-to-br from-purple-400 to-purple-500 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg">
+                    <i class="fas fa-star text-white text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-4 text-gray-800">Expert Guidance</h3>
+                <p class="text-gray-600 leading-relaxed">5+ years of experience in digital transformation with proven results and satisfied clients.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Still Have Questions Section -->
+<section class="py-20 bg-white relative overflow-hidden">
+    <div class="container mx-auto px-4">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6 text-gray-800">Still Have Questions?</h2>
+            <p class="text-xl text-gray-600 mb-16 leading-relaxed">
+                Need immediate assistance or prefer to talk directly? We're here to help!
+            </p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <!-- Direct Contact -->
+                {% if site_settings %}
+                <div class="bg-gradient-to-br from-yellow-50 to-yellow-100 rounded-3xl p-8 border border-yellow-200 shadow-lg">
+                    <div class="w-16 h-16 bg-gradient-to-br from-yellow-400 to-yellow-500 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg">
+                        <i class="fas fa-phone text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-gray-800">Call Us Directly</h3>
+                    <p class="text-gray-600 mb-6 leading-relaxed">
+                        Speak with our team immediately for urgent questions or detailed discussions about your project.
+                    </p>
+                    {% if site_settings.contact_phone %}
+                    <a href="tel:{{ site_settings.contact_phone }}" 
+                       class="inline-flex items-center bg-gradient-to-r from-yellow-500 to-yellow-400 hover:from-yellow-400 hover:to-yellow-300 text-yellow-900 font-bold py-3 px-6 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg">
+                        <i class="fas fa-phone mr-2"></i>
+                        {{ site_settings.contact_phone }}
+                    </a>
+                    {% else %}
+                    <a href="tel:+1234567890" 
+                       class="inline-flex items-center bg-gradient-to-r from-yellow-500 to-yellow-400 hover:from-yellow-400 hover:to-yellow-300 text-yellow-900 font-bold py-3 px-6 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg">
+                        <i class="fas fa-phone mr-2"></i>
+                        +1 (234) 567-890
+                    </a>
+                    {% endif %}
+                </div>
+                
+                <!-- Email Support -->
+                <div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-3xl p-8 border border-blue-200 shadow-lg">
+                    <div class="w-16 h-16 bg-gradient-to-br from-blue-400 to-blue-500 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg">
+                        <i class="fas fa-envelope text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-gray-800">Email Support</h3>
+                    <p class="text-gray-600 mb-6 leading-relaxed">
+                        Send us a detailed email and we'll respond with comprehensive answers and next steps.
+                    </p>
+                    {% if site_settings.contact_email %}
+                    <a href="mailto:{{ site_settings.contact_email }}" 
+                       class="inline-flex items-center bg-gradient-to-r from-blue-500 to-blue-400 hover:from-blue-400 hover:to-blue-300 text-white font-bold py-3 px-6 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg">
+                        <i class="fas fa-envelope mr-2"></i>
+                        {{ site_settings.contact_email }}
+                    </a>
+                    {% else %}
+                    <a href="mailto:hello@webbuilder.com" 
+                       class="inline-flex items-center bg-gradient-to-r from-blue-500 to-blue-400 hover:from-blue-400 hover:to-blue-300 text-white font-bold py-3 px-6 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg">
+                        <i class="fas fa-envelope mr-2"></i>
+                        hello@webbuilder.com
+                    </a>
+                    {% endif %}
+                </div>
+                {% else %}
+                <!-- Fallback if no site settings -->
+                <div class="bg-gradient-to-br from-yellow-50 to-yellow-100 rounded-3xl p-8 border border-yellow-200 shadow-lg">
+                    <div class="w-16 h-16 bg-gradient-to-br from-yellow-400 to-yellow-500 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg">
+                        <i class="fas fa-phone text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-gray-800">Call Us Directly</h3>
+                    <p class="text-gray-600 mb-6 leading-relaxed">
+                        Speak with our team immediately for urgent questions or detailed discussions about your project.
+                    </p>
+                    <a href="tel:+1234567890" 
+                       class="inline-flex items-center bg-gradient-to-r from-yellow-500 to-yellow-400 hover:from-yellow-400 hover:to-yellow-300 text-yellow-900 font-bold py-3 px-6 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg">
+                        <i class="fas fa-phone mr-2"></i>
+                        +1 (234) 567-890
+                    </a>
+                </div>
+                
+                <div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-3xl p-8 border border-blue-200 shadow-lg">
+                    <div class="w-16 h-16 bg-gradient-to-br from-blue-400 to-blue-500 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg">
+                        <i class="fas fa-envelope text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-gray-800">Email Support</h3>
+                    <p class="text-gray-600 mb-6 leading-relaxed">
+                        Send us a detailed email and we'll respond with comprehensive answers and next steps.
+                    </p>
+                    <a href="mailto:hello@webbuilder.com" 
+                       class="inline-flex items-center bg-gradient-to-r from-blue-500 to-blue-400 hover:from-blue-400 hover:to-blue-300 text-white font-bold py-3 px-6 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg">
+                        <i class="fas fa-envelope mr-2"></i>
+                        hello@webbuilder.com
+                    </a>
+                </div>
+                {% endif %}
+            </div>
+            
+            <!-- Additional Contact Options -->
+            <div class="mt-16 pt-12 border-t border-gray-200">
+                <h3 class="text-2xl font-bold mb-8 text-gray-800">Other Ways to Reach Us</h3>
+                <div class="flex flex-wrap justify-center gap-8">
+                    <!-- Full Contact Form -->
+                    <a href="{% url 'core:contact' %}" 
+                       class="group bg-white hover:bg-gray-50 border border-gray-200 hover:border-gray-300 rounded-2xl p-6 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-gradient-to-br from-purple-400 to-purple-500 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                                <i class="fas fa-comments text-white text-lg"></i>
+                            </div>
+                            <div class="text-left">
+                                <h4 class="font-bold text-gray-800 group-hover:text-purple-600 transition-colors duration-300">Full Contact Form</h4>
+                                <p class="text-sm text-gray-600">Detailed inquiry form with file uploads</p>
+                            </div>
+                        </div>
+                    </a>
+                    
+                    <!-- FAQ -->
+                    <a href="{% url 'core:faq' %}" 
+                       class="group bg-white hover:bg-gray-50 border border-gray-200 hover:border-gray-300 rounded-2xl p-6 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-gradient-to-br from-green-400 to-green-500 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                                <i class="fas fa-question-circle text-white text-lg"></i>
+                            </div>
+                            <div class="text-left">
+                                <h4 class="font-bold text-gray-800 group-hover:text-green-600 transition-colors duration-300">FAQ Center</h4>
+                                <p class="text-sm text-gray-600">Find answers to common questions</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="py-20 bg-gradient-to-br from-primary-900 via-primary-800 to-gray-900 text-white relative overflow-hidden">
+    <!-- Background Elements -->
+    <div class="absolute inset-0 overflow-hidden pointer-events-none">
+        <div class="absolute top-20 left-20 w-72 h-72 bg-gradient-to-br from-secondary-500/20 to-primary-500/10 rounded-full blur-3xl animate-float"></div>
+        <div class="absolute bottom-20 right-20 w-80 h-80 bg-gradient-to-br from-primary-500/20 to-secondary-400/10 rounded-full blur-3xl animate-float animation-delay-8000"></div>
+    </div>
+    
+    <div class="container mx-auto px-4 text-center relative z-10">
+        <h2 class="text-3xl md:text-4xl font-bold mb-6">Ready to Get Started?</h2>
+        <p class="text-xl mb-10 max-w-3xl mx-auto text-gray-300 leading-relaxed">
+            Continue exploring our website to learn more about our services and how we can help transform your business.
+        </p>
+        <a href="{% url 'core:home' %}" class="bg-gradient-to-r from-secondary-500 to-secondary-400 hover:from-secondary-400 hover:to-secondary-300 text-gray-800 font-bold py-4 px-8 rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-xl">
+            <i class="fas fa-home mr-2"></i>
+            Back to Home
+        </a>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+// Add floating animation
+const style = document.createElement('style');
+style.textContent = `
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+  }
+  .animate-float { animation: float 6s ease-in-out infinite; }
+  .animation-delay-8000 { animation-delay: 8s; }
+`;
+document.head.appendChild(style);
+</script>
+{% endblock %}

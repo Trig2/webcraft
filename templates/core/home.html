@@ -249,7 +249,7 @@
   
   <div class="container mx-auto px-4 relative z-10">
     <div class="text-center mb-20 reveal">
-      <div class="inline-flex items-center px-4 py-2 bg-gradient-to-r from-secondary-200 to-secondary-300 rounded-full text-sm font-medium text-primary-800 mb-4">
+      <div class="inline-flex items-center px-4 py-2 bg-gradient-to-r from-yellow-200 to-yellow-300 rounded-full text-sm font-medium text-yellow-900 mb-4">
         <i class="fas fa-cogs mr-2"></i>
         What We Offer
       </div>
@@ -267,11 +267,11 @@
         <div class="relative overflow-hidden">
           <div class="relative z-10">
             <!-- Enhanced Icon -->
-            <div class="w-20 h-20 bg-gradient-to-br from-primary-100 to-secondary-100 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-105 group-hover:rotate-1 transition-all duration-300 shadow-lg">
+            <div class="w-20 h-20 bg-gradient-to-br from-yellow-100 to-yellow-200 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-105 group-hover:rotate-1 transition-all duration-300 shadow-lg">
               {% if service.icon %}
-              <i class="fas fa-{{ service.icon }} text-3xl bg-gradient-to-r from-primary-600 to-secondary-600 bg-clip-text text-transparent"></i>
+              <i class="fas fa-{{ service.icon }} text-3xl bg-gradient-to-r from-yellow-600 to-yellow-500 bg-clip-text text-transparent"></i>
               {% else %}
-              <i class="fas fa-cogs text-3xl bg-gradient-to-r from-primary-600 to-secondary-600 bg-clip-text text-transparent"></i>
+              <i class="fas fa-cogs text-3xl bg-gradient-to-r from-yellow-600 to-yellow-500 bg-clip-text text-transparent"></i>
               {% endif %}
             </div>
             
@@ -280,25 +280,25 @@
             
             <!-- Pricing Section -->
             {% if service.price %}
-            <div class="mb-6 p-4 bg-gradient-to-r from-primary-50 to-secondary-50 rounded-xl border border-primary-100">
+            <div class="mb-6 p-4 bg-gradient-to-r from-yellow-50 to-yellow-100 rounded-xl border border-yellow-200">
               <div class="flex items-center justify-between">
                 <div>
-                  <div class="text-2xl font-bold text-primary-600">${{ service.price }}</div>
+                  <div class="text-2xl font-bold text-yellow-700">${{ service.price }}</div>
                   <div class="text-sm text-gray-500">Starting from</div>
                 </div>
-                <div class="text-primary-500">
+                <div class="text-yellow-600">
                   <i class="fas fa-tag text-xl"></i>
                 </div>
               </div>
             </div>
             {% else %}
-            <div class="mb-6 p-4 bg-gradient-to-r from-secondary-50 to-secondary-100 rounded-xl border border-secondary-200">
+            <div class="mb-6 p-4 bg-gradient-to-r from-yellow-50 to-yellow-100 rounded-xl border border-yellow-200">
               <div class="flex items-center justify-between">
                 <div>
-                  <div class="text-xl font-bold text-gray-700">Custom Quote</div>
+                  <div class="text-xl font-bold text-yellow-700">Custom Quote</div>
                   <div class="text-sm text-gray-500">Contact for pricing</div>
                 </div>
-                <div class="text-secondary-600">
+                <div class="text-yellow-600">
                   <i class="fas fa-calculator text-xl"></i>
                 </div>
               </div>
@@ -306,14 +306,14 @@
             {% endif %}
             
             <!-- Enhanced CTA -->
-            <a href="{% url 'services:detail' service.slug %}" class="inline-flex items-center font-semibold text-primary-600 hover:text-secondary-600 transition-all duration-300 group/link">
+            <a href="{% url 'services:detail' service.slug %}" class="inline-flex items-center font-semibold text-yellow-600 hover:text-yellow-500 transition-all duration-300 group/link">
               {% if service.price %}Get Started{% else %}Get Quote{% endif %}
               <i class="fas fa-arrow-right ml-2 transform group-hover/link:translate-x-2 transition-transform duration-300"></i>
             </a>
             
             <!-- Price Badge (if available) -->
             {% if service.price %}
-            <div class="absolute top-4 right-4 bg-gradient-to-r from-green-400 to-green-600 text-white text-xs font-bold px-3 py-1 rounded-full">
+            <div class="absolute top-4 right-4 bg-gradient-to-r from-yellow-400 to-yellow-500 text-yellow-900 text-xs font-bold px-3 py-1 rounded-full">
               From ${{ service.price }}
             </div>
             {% endif %}
@@ -332,7 +332,7 @@
     </div>
     
     <div class="text-center mt-20 reveal" data-aos="fade-up" data-aos-delay="700">
-      <a href="{% url 'services:list' %}" class="btn-primary bg-gradient-to-r from-primary-600 to-secondary-600 hover:from-secondary-600 hover:to-primary-600 transform hover:scale-105 transition-all duration-300 shadow-xl">
+      <a href="{% url 'services:list' %}" class="btn-primary bg-gradient-to-r from-yellow-500 to-yellow-400 hover:from-yellow-400 hover:to-yellow-300 text-yellow-900 transform hover:scale-105 transition-all duration-300 shadow-xl">
         <span>Explore All Services</span>
         <i class="fas fa-arrow-right ml-2"></i>
       </a>
@@ -1116,9 +1116,9 @@
     </div>
 
     <!-- FAQ Accordion -->
-    <div class="max-w-5xl mx-auto">
+    <div class="max-w-7xl mx-auto">
       {% if faqs %}
-      <div class="space-y-6">
+      <div class="space-y-6 grid grid-cols-1 md:grid-cols-2 gap-8">
         {% for faq in faqs %}
         <div class="group reveal" data-aos="fade-up" data-aos-delay="{{ forloop.counter }}00">
           <!-- FAQ Item -->
@@ -1148,7 +1148,7 @@
             <!-- Answer Content -->
             <div class="faq-content max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
               <div class="px-8 pb-8">
-                <div class="pl-18">
+                <div class="">
                   <div class="bg-gradient-to-r from-primary-50 to-secondary-50 rounded-2xl p-6 border-l-4 border-primary-500">
                     <p class="text-gray-700 text-lg leading-relaxed">
                       {{ faq.answer }}
@@ -1180,36 +1180,97 @@
       {% endif %}
     </div>
     
-    <!-- Contact CTA -->
-    <div class="text-center mt-20 reveal">
-      <div class="bg-white/60 backdrop-blur-lg rounded-3xl p-12 shadow-2xl border border-white/30 max-w-4xl mx-auto relative overflow-hidden">
-        <!-- Background Gradient -->
-        <div class="absolute inset-0 bg-gradient-to-r from-primary-50/80 to-secondary-50/80"></div>
+  
+
+    <!-- Still Have Questions Section -->
+<section class="py-16 bg-gradient-to-br from-gray-50 to-white">
+  <div class="container mx-auto px-4">
+    <div class="text-center">
+      <h2 class="text-3xl font-bold text-gray-800 mb-4">Still Have Questions?</h2>
+      <p class="text-gray-600 mb-8 max-w-2xl mx-auto">
+        Our team is here to help you every step of the way. Get in touch with us for personalized assistance.
+      </p>
+      
+      <!-- Contact Information Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
         
-        <!-- Content -->
-        <div class="relative z-10">
-          <div class="w-20 h-20 bg-gradient-to-br from-secondary-400 to-secondary-500 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-xl">
-            <i class="fas fa-headset text-gray-800 text-3xl"></i>
+        <!-- Phone -->
+        <div class="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 group">
+          <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+            <i class="fas fa-phone text-white text-xl"></i>
           </div>
-          <h3 class="text-3xl font-bold text-gray-800 mb-6">Still Have Questions?</h3>
-          <p class="text-gray-700 text-lg mb-8 max-w-2xl mx-auto leading-relaxed">
-            Our team is always ready to help! Get in touch and we'll provide personalized answers to any questions about your project.
-          </p>
-          
-          <!-- Contact Options -->
-          <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <a href="#contact" class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 text-white font-bold rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-xl">
-              <i class="fas fa-paper-plane mr-3"></i>
-              Send Us a Message
+          <h3 class="text-lg font-semibold text-gray-800 mb-2">Call Us</h3>
+          {% if tel %}
+            <a href="tel:{{ tel }}" class="text-blue-600 hover:text-blue-700 font-medium transition-colors duration-200">
+              {{ tel }}
             </a>
-            <a href="tel:+1234567890" class="inline-flex items-center px-8 py-4 bg-white text-primary-700 font-bold rounded-2xl border-2 border-primary-200 hover:border-primary-400 hover:bg-primary-50 transition-all duration-300 transform hover:scale-105 shadow-lg">
-              <i class="fas fa-phone mr-3"></i>
-              Call Us Now
-            </a>
+          {% else %}
+            <p class="text-gray-500">Contact number coming soon</p>
+          {% endif %}
+        </div>
+        
+        <!-- Email -->
+        <div class="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 group">
+          <div class="w-16 h-16 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+            <i class="fas fa-envelope text-white text-xl"></i>
           </div>
+          <h3 class="text-lg font-semibold text-gray-800 mb-2">Email Us</h3>
+          {% if mail %}
+            <a href="mailto:{{ mail }}" class="text-green-600 hover:text-green-700 font-medium transition-colors duration-200">
+              {{ mail }}
+            </a>
+          {% else %}
+            <p class="text-gray-500">Email coming soon</p>
+          {% endif %}
+        </div>
+        
+        <!-- Address -->
+        <div class="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 group">
+          <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+            <i class="fas fa-map-marker-alt text-white text-xl"></i>
+          </div>
+          <h3 class="text-lg font-semibold text-gray-800 mb-2">Visit Us</h3>
+          {% if address %}
+            <p class="text-purple-600 font-medium">{{ address }}</p>
+          {% else %}
+            <p class="text-gray-500">Address coming soon</p>
+          {% endif %}
+        </div>
+        
+      </div>
+      
+      <!-- Social Media Links -->
+      {% if facebook or twitter or linkedin or instagram %}
+      <div class="mt-8 pt-8 border-t border-gray-200">
+        <p class="text-gray-600 mb-4">Follow us on social media</p>
+        <div class="flex justify-center space-x-4">
+          {% if facebook %}
+            <a href="{{ facebook }}" target="_blank" class="w-12 h-12 bg-blue-600 hover:bg-blue-700 rounded-full flex items-center justify-center text-white transition-all duration-300 transform hover:scale-110">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+          {% endif %}
+          {% if twitter %}
+            <a href="{{ twitter }}" target="_blank" class="w-12 h-12 bg-blue-400 hover:bg-blue-500 rounded-full flex items-center justify-center text-white transition-all duration-300 transform hover:scale-110">
+              <i class="fab fa-twitter"></i>
+            </a>
+          {% endif %}
+          {% if linkedin %}
+            <a href="{{ linkedin }}" target="_blank" class="w-12 h-12 bg-blue-700 hover:bg-blue-800 rounded-full flex items-center justify-center text-white transition-all duration-300 transform hover:scale-110">
+              <i class="fab fa-linkedin-in"></i>
+            </a>
+          {% endif %}
+          {% if instagram %}
+            <a href="{{ instagram }}" target="_blank" class="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 rounded-full flex items-center justify-center text-white transition-all duration-300 transform hover:scale-110">
+              <i class="fab fa-instagram"></i>
+            </a>
+          {% endif %}
         </div>
       </div>
+      {% endif %}
+      
     </div>
+  </div>
+</section>
   </div>
 </section>
 
@@ -2043,7 +2104,7 @@ function toggleFAQ(element) {
               <p class="text-gray-300">Fill out the form below and we'll be in touch soon</p>
             </div>
             
-            <form method="post" action="{% url 'core:contact' %}" class="space-y-6">
+            <form method="post" action="{% url 'core:quick_inquiry' %}" class="space-y-6">
               {% csrf_token %}
               
               <!-- Name Field -->
@@ -2167,6 +2228,8 @@ function toggleFAQ(element) {
     </div>
   </div>
 </section>
+
+
 
 {% endblock %}
 

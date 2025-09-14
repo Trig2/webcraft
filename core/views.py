@@ -25,6 +25,7 @@ from .forms import (
     LeadCaptureForm,
     QuickQuoteForm,
     CustomUserCreationForm,
+    QuickInquiryForm,
 )
 from django.conf import settings
 import os
@@ -334,6 +335,39 @@ def contact(request):
             "form": form,
         },
     )
+
+
+def quick_inquiry(request):
+    """View for handling quick inquiry submissions from home page"""
+    if request.method == "POST":
+        form = QuickInquiryForm(request.POST)
+        if form.is_valid():
+            inquiry = form.save(commit=False)
+            # Capture IP address for analytics
+            x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+            if x_forwarded_for:
+                inquiry.ip_address = x_forwarded_for.split(',')[0]
+            else:
+                inquiry.ip_address = request.META.get('REMOTE_ADDR')
+            inquiry.save()
+            
+            # Get site settings for contact information
+            try:
+                site_settings = SiteSetting.objects.first()
+            except SiteSetting.DoesNotExist:
+                site_settings = None
+            
+            return render(request, "core/quick_inquiry_success.html", {
+                'inquiry': inquiry,
+                'site_settings': site_settings
+            })
+        else:
+            # If form is invalid, return to home page with errors
+            messages.error(request, "Please correct the errors below and try again.")
+            return redirect('core:home')
+    else:
+        # GET request - redirect to home page
+        return redirect('core:home')
 
 
 def faq(request):

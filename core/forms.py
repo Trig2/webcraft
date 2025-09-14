@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-from .models import ContactMessage, NewsletterSubscriber, Lead, Quote, TeamMember
+from .models import ContactMessage, NewsletterSubscriber, Lead, Quote, TeamMember, QuickInquiry
 
 
 class CustomUserCreationForm(UserCreationForm):
@@ -264,3 +264,43 @@ class TeamMemberForm(forms.ModelForm):
             'hero': 'Upload a hero/banner image for your profile (recommended: 1200x400px)',
             'bio': 'Describe your skills, experience, and interests',
         }
+
+
+class QuickInquiryForm(forms.ModelForm):
+    """Form for Quick Inquiry submissions from home page"""
+    
+    class Meta:
+        model = QuickInquiry
+        fields = ['name', 'email', 'project_type', 'message', 'budget']
+        widgets = {
+            'name': forms.TextInput(attrs={
+                'class': 'w-full px-6 py-4 bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-secondary-400 focus:border-secondary-400 transition-all duration-300 group-hover:bg-white/15',
+                'placeholder': 'John Doe',
+                'required': True
+            }),
+            'email': forms.EmailInput(attrs={
+                'class': 'w-full px-6 py-4 bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-secondary-400 focus:border-secondary-400 transition-all duration-300 group-hover:bg-white/15',
+                'placeholder': 'john@example.com',
+                'required': True
+            }),
+            'project_type': forms.Select(attrs={
+                'class': 'w-full px-6 py-4 bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl text-white focus:outline-none focus:ring-2 focus:ring-secondary-400 focus:border-secondary-400 transition-all duration-300 group-hover:bg-white/15',
+                'required': True
+            }),
+            'message': forms.Textarea(attrs={
+                'class': 'w-full px-6 py-4 bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-secondary-400 focus:border-secondary-400 transition-all duration-300 group-hover:bg-white/15 resize-none',
+                'placeholder': 'Tell us about your project, goals, timeline, and any specific requirements...',
+                'rows': 5,
+                'required': True
+            }),
+            'budget': forms.Select(attrs={
+                'class': 'w-full px-6 py-4 bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl text-white focus:outline-none focus:ring-2 focus:ring-secondary-400 focus:border-secondary-400 transition-all duration-300 group-hover:bg-white/15'
+            }),
+        }
+        
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Add empty option for project_type and budget
+        self.fields['project_type'].empty_label = "Select a project type"
+        self.fields['budget'].empty_label = "Select budget range"
+        self.fields['budget'].required = False  # Budget is optional

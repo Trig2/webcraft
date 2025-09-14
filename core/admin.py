@@ -19,6 +19,7 @@ from .models import (
     Client,
     WebsiteAnalytics,
     ConversionTracking,
+    QuickInquiry,
 )
 
 
@@ -43,8 +44,51 @@ class PricingPlanAdmin(admin.ModelAdmin):
 
 @admin.register(SiteSetting)
 class SiteSettingAdmin(admin.ModelAdmin):
-    list_display = ("site_name", "contact_email", "contact_phone", "updated_at")
+    list_display = (
+        "site_name", 
+        "contact_email", 
+        "contact_phone", 
+        "maintenance_mode_status",
+        "updated_at"
+    )
     search_fields = ("site_name", "contact_email", "contact_phone")
+    list_filter = ("maintenance_mode", "updated_at")
+    
+    fieldsets = (
+        ("Basic Information", {
+            "fields": ("site_name", "logo", "about")
+        }),
+        ("Contact Information", {
+            "fields": ("contact_email", "contact_phone", "address")
+        }),
+        ("Social Media", {
+            "fields": ("facebook", "twitter", "linkedin", "instagram"),
+            "classes": ("collapse",)
+        }),
+        ("System Settings", {
+            "fields": ("maintenance_mode",),
+            "description": "Use maintenance mode to temporarily disable the site for regular users while keeping admin access."
+        }),
+    )
+    
+    def maintenance_mode_status(self, obj):
+        if obj.maintenance_mode:
+            return format_html(
+                '<span style="color: #e74c3c; font-weight: bold;">🔧 MAINTENANCE ON</span>'
+            )
+        else:
+            return format_html(
+                '<span style="color: #27ae60; font-weight: bold;">✅ ONLINE</span>'
+            )
+    
+    maintenance_mode_status.short_description = "Status"
+    
+    def save_model(self, request, obj, form, change):
+        """Clear cache when maintenance mode is changed"""
+        from django.core.cache import cache
+        super().save_model(request, obj, form, change)
+        # Clear maintenance mode cache to immediately apply changes
+        cache.delete('maintenance_mode')
 
 
 @admin.register(NewsletterSubscriber)
@@ -227,3 +271,55 @@ class ConversionTrackingAdmin(admin.ModelAdmin):
     search_fields = ("source", "page_url")
     ordering = ("-timestamp",)
     date_hierarchy = "timestamp"
+
+
+@admin.register(QuickInquiry)
+class QuickInquiryAdmin(admin.ModelAdmin):
+    list_display = (
+        "name",
+        "email", 
+        "project_type",
+        "budget",
+        "status",
+        "created_at",
+        "contacted_at"
+    )
+    list_filter = ("project_type", "budget", "status", "created_at")
+    search_fields = ("name", "email", "message")
+    ordering = ("-created_at",)
+    readonly_fields = ("ip_address", "created_at", "updated_at")
+    date_hierarchy = "created_at"
+    
+    fieldsets = (
+        ("Contact Information", {
+            "fields": ("name", "email")
+        }),
+        ("Project Details", {
+            "fields": ("project_type", "budget", "message")
+        }),
+        ("Management", {
+            "fields": ("status", "notes", "contacted_at")
+        }),
+        ("System Information", {
+            "fields": ("ip_address", "created_at", "updated_at"),
+            "classes": ("collapse",)
+        }),
+    )
+    
+    actions = ["mark_as_contacted", "mark_as_quoted", "mark_as_completed"]
+    
+    def mark_as_contacted(self, request, queryset):
+        from django.utils import timezone
+        updated = queryset.update(status="contacted", contacted_at=timezone.now())
+        self.message_user(request, f"{updated} inquiries marked as contacted.")
+    mark_as_contacted.short_description = "Mark selected inquiries as contacted"
+    
+    def mark_as_quoted(self, request, queryset):
+        updated = queryset.update(status="quoted")
+        self.message_user(request, f"{updated} inquiries marked as quoted.")
+    mark_as_quoted.short_description = "Mark selected inquiries as quoted"
+    
+    def mark_as_completed(self, request, queryset):
+        updated = queryset.update(status="completed")
+        self.message_user(request, f"{updated} inquiries marked as completed.")
+    mark_as_completed.short_description = "Mark selected inquiries as completed"
