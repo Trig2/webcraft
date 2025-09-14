@@ -1,5 +1,6 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator
+from django.contrib import messages
 from .models import Project
 from core.models import ActivityLog
 from core.models import SiteSetting
@@ -51,8 +52,13 @@ def project_list(request):
 
 
 def project_detail(request, project_id):
-    """View for displaying project details"""
-    project = get_object_or_404(Project, id=project_id, status="completed")
+    """View for displaying project details with graceful error handling"""
+    try:
+        project = get_object_or_404(Project, id=project_id, status="completed")
+    except:
+        # If project doesn't exist, redirect to portfolio with a friendly message
+        messages.info(request, f"The project you're looking for (#{project_id}) is not available. Please browse our other projects below.")
+        return redirect('projects:list')
 
     # Get all collaborators for this project using the new helper method
     collaborators_data = []

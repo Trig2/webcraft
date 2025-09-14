@@ -9,7 +9,7 @@ class CustomUserCreationForm(UserCreationForm):
     email = forms.EmailField(
         required=True,
         widget=forms.EmailInput(attrs={
-            'class': 'w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200',
+            'class': 'w-full px-3 lg:px-4 py-2 lg:py-3 bg-white/10 border border-white/20 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-400 transition-all duration-200 text-white placeholder-white/60 backdrop-blur-sm',
             'placeholder': 'Enter your email address'
         })
     )
@@ -19,7 +19,7 @@ class CustomUserCreationForm(UserCreationForm):
         fields = ("username", "email", "password1", "password2")
         widgets = {
             'username': forms.TextInput(attrs={
-                'class': 'w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200',
+                'class': 'w-full px-3 lg:px-4 py-2 lg:py-3 bg-white/10 border border-white/20 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-400 transition-all duration-200 text-white placeholder-white/60 backdrop-blur-sm',
                 'placeholder': 'Choose a username'
             }),
         }
@@ -28,11 +28,11 @@ class CustomUserCreationForm(UserCreationForm):
         super().__init__(*args, **kwargs)
         # Style the password fields
         self.fields['password1'].widget.attrs.update({
-            'class': 'w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200',
+            'class': 'w-full px-3 lg:px-4 py-2 lg:py-3 bg-white/10 border border-white/20 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-400 transition-all duration-200 text-white placeholder-white/60 backdrop-blur-sm',
             'placeholder': 'Create a password'
         })
         self.fields['password2'].widget.attrs.update({
-            'class': 'w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200',
+            'class': 'w-full px-3 lg:px-4 py-2 lg:py-3 bg-white/10 border border-white/20 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-400 transition-all duration-200 text-white placeholder-white/60 backdrop-blur-sm',
             'placeholder': 'Confirm your password'
         })
     

@@ -177,8 +177,53 @@ class Command(BaseCommand):
             }
         ]
 
+        # Add 20 more projects to ensure we have enough for production
+        additional_projects = []
+        client_names = [
+            'Alex Turner', 'Maria Gonzalez', 'Tom Wilson', 'Anna Schmidt', 'Carlos Mendez',
+            'Sofia Petrova', 'Jake Miller', 'Isabella Costa', 'Ryan O\'Connor', 'Priya Sharma',
+            'Omar Hassan', 'Elena Rossi', 'Nathan Kim', 'Zara Al-Ahmad', 'Lucas Silva',
+            'Fatima Kone', 'Daniel Larsson', 'Aisha Patel', 'Max Weber', 'Lina Andersson'
+        ]
+        
+        organizations = [
+            'Tech Solutions Inc', 'Digital Innovations', 'Creative Minds Agency', 'Global Ventures',
+            'Smart Systems Ltd', 'Future Designs', 'Innovative Works', 'Professional Services',
+            'Modern Solutions', 'Elite Consulting', 'Prime Technologies', 'Advanced Systems',
+            'Dynamic Enterprises', 'Strategic Partners', 'Excellence Group', 'Progressive Tech',
+            'Superior Solutions', 'Leading Edge Co', 'Premium Services', 'Quality Systems'
+        ]
+        
+        project_titles = [
+            'Advanced E-learning Platform', 'Medical Records System', 'Real Estate Portal',
+            'Fitness Tracking App', 'Restaurant Management System', 'Event Planning Platform',
+            'Inventory Management Tool', 'Customer Support Portal', 'Social Media Dashboard',
+            'Financial Planning App', 'HR Management System', 'Project Tracking Tool',
+            'Booking Management System', 'Content Management Platform', 'Analytics Dashboard',
+            'Communication Portal', 'Workflow Automation Tool', 'Document Management System',
+            'Customer Relationship Platform', 'Business Intelligence Dashboard'
+        ]
+        
+        project_types = ['marketing', 'school', 'hospital', 'ecommerce', 'portfolio', 'blog', 'custom']
+        
+        for i in range(20):
+            additional_projects.append({
+                'client_name': client_names[i],
+                'client_email': f'{client_names[i].lower().replace(" ", "").replace("\'", "")}@example.com',
+                'organization_name': organizations[i],
+                'title': project_titles[i],
+                'description': f'Professional {project_titles[i].lower()} with modern features and responsive design',
+                'project_type': project_types[i % len(project_types)],
+                'status': 'completed',
+                'budget': random.uniform(3000, 15000),
+                'completed_date': date.today() - timedelta(days=random.randint(5, 100))
+            })
+        
+        # Combine original and additional projects
+        all_projects = sample_projects + additional_projects
+
         created_count = 0
-        for project_data in sample_projects:
+        for project_data in all_projects:
             project, created = Project.objects.get_or_create(
                 title=project_data['title'],
                 client_email=project_data['client_email'],
